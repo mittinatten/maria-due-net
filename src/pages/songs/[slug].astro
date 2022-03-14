@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Song from "../../components/Song.svelte";
+import { getSongBySlug, getAllSongs } from "../../utils/data";
+import { BreadCrumb } from "../../types";
+
+const { slug } = Astro.request.params;
+
+export async function getStaticPaths() {
+  const songs = await getAllSongs();
+  return songs.map(({ path }) => ({ params: { slug: path.split('/').pop() } }));
+};
+
+const song = await getSongBySlug(slug);
+const breadCrumb: BreadCrumb = [{ ...song.album }, { ...song }]
+---
+
+<BaseLayout title={"Maria Due - " + song.title + " (song)"} breadCrumb={breadCrumb}>
+  <Song {song} />
+</BaseLayout>

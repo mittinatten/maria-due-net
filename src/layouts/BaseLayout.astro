@@ -1,0 +1,28 @@
+---
+import "../styles/global.css";
+
+import Header from "../components/Header.svelte";
+import { BreadCrumb } from "../types";
+
+const { title = "Maria Due", breadCrumb = [] as BreadCrumb } = Astro.props;
+const { url } = Astro.request;
+
+---
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>{title}</title>
+  <link rel="shortcut icon" href="/icons/icon-48x48.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto+Mono:ital,wght@1,300&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <Header {breadCrumb} {url} />
+  <main>
+    <slot />
+  </main>
+</body>
+</html>

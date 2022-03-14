@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Album from "../../components/Album.svelte";
+import { getAllAlbums, getAlbumBySlug } from "../../utils/data";
+
+const { slug } = Astro.request.params;
+
+export async function getStaticPaths() {
+  const albums = await getAllAlbums();
+  return albums.map(album => ({ params: { slug: album.path.split('/').pop() } }));
+};
+
+const album = await getAlbumBySlug(slug);
+---
+
+<BaseLayout title={"Maria Due - " + album.title + " (album)"}>
+  <Album {album} />
+</BaseLayout>

@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "astro": "^0.24.0"
+  },
+  "dependencies": {
+    "@astrojs/renderer-svelte": "^0.5.1"
   }
 }

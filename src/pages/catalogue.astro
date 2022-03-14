@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Catalogue from "../components/Catalogue.svelte";
+import { getAllAlbums } from "../utils/data";
+
+const albums = await getAllAlbums()
+
+---
+<BaseLayout title="Maria Due - Catalogue">
+  <Catalogue {albums} />
+</BaseLayout>
