@@ -16,9 +16,9 @@
   <nav>
     <div class="top-row">
       <div class="title">
-        <h2 style="margin: 0">
+        <h1 style="margin: 0">
           <a href="/" style="text-decoration: none"> Maria Due </a>
-        </h2>
+        </h1>
       </div>
       <div class="menu">
         {#each menuItems as item}
@@ -33,9 +33,7 @@
     {#if breadCrumb && breadCrumb.length}
       <div class="breadcrumb">
         {#each breadCrumb.filter((item) => !!item.path) as item}
-          <span class="item">
-            <a href={item.path}>{item.title}</a>
-          </span>
+          <a class="item" href={item.path}>{item.title}</a>
         {/each}
       </div>
     {/if}
@@ -44,7 +42,7 @@
 
 <style>
   header {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     align-items: center;
   }
 
@@ -63,8 +61,8 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    border-bottom: 2px solid var(--color-dark);
-    padding-bottom: 16px;
+    border-bottom: 2px solid var(--color-text);
+    padding-bottom: 12px;
     gap: 32px;
   }
 
@@ -78,14 +76,21 @@
   }
 
   .breadcrumb {
-    margin-top: 0.5rem;
     font-size: 0.8rem;
     text-transform: uppercase;
-    margin: 0px 0.5rem;
+    margin-top: 12px;
+  }
+
+  .breadcrumb .item {
+    padding: 8px;
+  }
+
+  .breadcrumb .item:not(:first-of-type) {
+    padding-left: 0px;
   }
 
   .breadcrumb .item:not(:first-of-type)::before {
-    content: "> "; /* todo: put icon here */
+    content: "〉";
   }
 
   @media only screen and (min-width: 600px) {

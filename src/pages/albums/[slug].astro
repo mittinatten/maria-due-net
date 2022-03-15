@@ -2,6 +2,8 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Album from "../../components/Album.svelte";
 import { getAllAlbums, getAlbumBySlug } from "../../utils/data";
+import type { BreadCrumb } from "../../types";
+
 
 const { slug } = Astro.request.params;
 
@@ -11,8 +13,9 @@ export async function getStaticPaths() {
 };
 
 const album = await getAlbumBySlug(slug);
+const breadCrumb: BreadCrumb = [{ path: "/catalogue", title: "Catalogue"}, album ];
 ---
 
-<BaseLayout title={"Maria Due - " + album.title + " (album)"}>
+<BaseLayout title={"Maria Due - " + album.title + " (album)"} {breadCrumb}>
   <Album {album} />
 </BaseLayout>

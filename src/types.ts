@@ -8,6 +8,15 @@ export type BreadCrumb = Link[];
 export interface RawAlbum {
   title: string;
   songs: { title: string }[];
+  recordLabel: {
+    name: string;
+    homePage: string;
+  };
+  cover: {
+    asset: {
+      url: string;
+    };
+  };
 }
 
 export interface Album extends RawAlbum {

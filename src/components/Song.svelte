@@ -5,4 +5,11 @@
 </script>
 
 <h2>{song.title}</h2>
-<pre>{song.lyrics}</pre>
+<div class="lyrics">{song.lyrics}</div>
+
+<style>
+  .lyrics {
+    font-style: normal;
+    white-space: pre-wrap;
+  }
+</style>

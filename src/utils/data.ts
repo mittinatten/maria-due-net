@@ -45,6 +45,11 @@ export async function getAllAlbums(): Promise<Album[]> {
             songs {
               title
             }
+            cover {
+              asset {
+                url
+              }
+            }
           }
         }`,
       }),
