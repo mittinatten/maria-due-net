@@ -17,11 +17,18 @@ export interface RawAlbum {
       url: string;
     };
   };
+  year: number;
+  spotify: string;
+  producer: {
+    name;
+    homePage;
+    sameAs;
+  };
 }
 
 export interface Album extends RawAlbum {
   path: string;
-  songs: BreadCrumb;
+  songs: Link[];
 }
 
 export interface RawSong {
@@ -36,4 +43,16 @@ export interface RawSong {
 export interface Song extends RawSong {
   path: string;
   album: Link;
+}
+
+export interface AppearsOn {
+  title: string;
+  year: number;
+  spotify: string;
+  by: {
+    about: string;
+    name: string;
+    homePage: string;
+    sameAs: string;
+  };
 }

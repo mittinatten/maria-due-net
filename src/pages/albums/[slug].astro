@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 };
 
 const album = await getAlbumBySlug(slug);
-const breadCrumb: BreadCrumb = [{ path: "/catalogue", title: "Catalogue"}, album ];
+const breadCrumb: BreadCrumb = [{ path: "/catalogue", title: "Albums"}, album ];
 ---
 
 <BaseLayout title={"Maria Due - " + album.title + " (album)"} {breadCrumb}>

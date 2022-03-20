@@ -5,7 +5,10 @@
 </script>
 
 <h2>
-  {album.title}
+  <a href={album.spotify} aria-label="Play album on spotify">
+    <i class="fa fa-play-circle" />
+  </a>
+  {album.title} ({album.year})
 </h2>
 <div class="cover-song-list">
   <div>
@@ -17,8 +20,13 @@
     {/each}
   </ol>
 </div>
+<p>Produced by <a href={album.producer.homePage}>{album.producer.name}</a></p>
 
 <style>
+  h2 a {
+    margin-right: 0.5rem;
+  }
+
   .cover-song-list {
     display: flex;
     flex-direction: column;
@@ -28,7 +36,7 @@
   }
 
   img {
-    max-width: 100%;
+    width: 100%;
   }
 
   li {

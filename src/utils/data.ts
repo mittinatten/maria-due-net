@@ -1,4 +1,6 @@
-import { RawAlbum, Album, RawSong, Song } from "../types";
+import { RawAlbum, Album, RawSong, Song, AppearsOn } from "../types";
+
+const API_URL = "https://zp0hhhsi.api.sanity.io/v1/graphql/production/default";
 
 function titleToSlug(title: string) {
   return title.replace(/ /g, "-").toLowerCase();
@@ -16,13 +18,11 @@ let allAlbums: Album[];
 export async function getAllAlbums(): Promise<Album[]> {
   if (allAlbums) return allAlbums;
 
-  const response = await fetch(
-    "https://zp0hhhsi.api.sanity.io/v1/graphql/production/default",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query: `
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
         query Albums {
           allAlbums {
             title,
@@ -52,20 +52,21 @@ export async function getAllAlbums(): Promise<Album[]> {
             }
           }
         }`,
-      }),
-    }
-  );
+    }),
+  });
 
   const json = await response.json();
 
-  allAlbums = json.data.allAlbums.map((album: RawAlbum) => ({
-    ...album,
-    path: albumPath(album),
-    songs: album.songs.map((song) => ({
-      ...song,
-      path: songPath(song),
-    })),
-  }));
+  allAlbums = json.data.allAlbums
+    .map((album: RawAlbum) => ({
+      ...album,
+      path: albumPath(album),
+      songs: album.songs.map((song) => ({
+        ...song,
+        path: songPath(song),
+      })),
+    }))
+    .sort((a1: Album, a2: Album) => (a1.year > a2.year ? 1 : -1));
 
   return allAlbums;
 }
@@ -80,13 +81,11 @@ let allSongs: Song[];
 export async function getAllSongs(): Promise<Song[]> {
   if (allSongs) return allSongs;
 
-  const response = await fetch(
-    "https://zp0hhhsi.api.sanity.io/v1/graphql/production/default",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query: `
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
         query Songs {
           allSongs {
             title,
@@ -96,9 +95,8 @@ export async function getAllSongs(): Promise<Song[]> {
             }
           }
         }`,
-      }),
-    }
-  );
+    }),
+  });
 
   const json = await response.json();
 
@@ -118,4 +116,35 @@ export async function getSongBySlug(slug: string): Promise<Song> {
   return getAllSongs().then((songs) =>
     songs.find((song) => song.path.endsWith(slug))
   );
+}
+
+let allAppearsOn: AppearsOn[];
+export async function getAllAppearsOn(): Promise<AppearsOn[]> {
+  if (allAppearsOn) return allAppearsOn;
+
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `
+        query Collaborations {
+          allAppearsOns {
+            title,
+            year,
+            spotify,
+            by {
+              about,
+              name,
+              homePage,
+              sameAs,
+            }
+          }
+        }`,
+    }),
+  });
+
+  const json = await response.json();
+
+  allAppearsOn = json.data.allAppearsOns;
+  return allAppearsOn;
 }

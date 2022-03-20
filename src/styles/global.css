@@ -33,6 +33,10 @@ h2 {
   font-size: calc(32 / 16 * 1rem);
 }
 
+h3 {
+  font-size: calc(26 / 16 * 1rem);
+}
+
 body {
   padding: 2rem;
   width: 100%;

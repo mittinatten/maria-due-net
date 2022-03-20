@@ -30,13 +30,12 @@
         {/each}
       </div>
     </div>
-    {#if breadCrumb && breadCrumb.length}
-      <div class="breadcrumb">
-        {#each breadCrumb.filter((item) => !!item.path) as item}
-          <a class="item" href={item.path}>{item.title}</a>
-        {/each}
-      </div>
-    {/if}
+
+    <div class="breadcrumb">
+      {#each breadCrumb.filter((item) => !!item.path) as item}
+        <a class="item" href={item.path}>{item.title}</a>
+      {/each}
+    </div>
   </nav>
 </header>
 
@@ -79,18 +78,22 @@
     font-size: 0.8rem;
     text-transform: uppercase;
     margin-top: 12px;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 1.5rem;
   }
 
   .breadcrumb .item {
-    padding: 8px;
+    padding: 8px 2px;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
-  .breadcrumb .item:not(:first-of-type) {
-    padding-left: 0px;
-  }
-
-  .breadcrumb .item:not(:first-of-type)::before {
+  .breadcrumb .item::after {
     content: "〉";
+    padding-left: 10px;
   }
 
   @media only screen and (min-width: 600px) {
