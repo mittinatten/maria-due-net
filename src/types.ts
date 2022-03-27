@@ -6,6 +6,13 @@ type SanityImage = {
   };
 };
 
+export type Person = {
+  name: string;
+  homePage: string;
+  sameAs: string;
+  about: string;
+};
+
 export type Link = {
   title: string;
   path: string;
@@ -23,11 +30,7 @@ export interface RawAlbum {
   cover: SanityImage;
   year: number;
   spotify: string;
-  producer: {
-    name;
-    homePage;
-    sameAs;
-  };
+  producer: Person;
 }
 
 export interface Album extends RawAlbum {
@@ -38,15 +41,19 @@ export interface Album extends RawAlbum {
 export interface RawSong {
   title: string;
   lyrics: string;
-  lyricsBy: string;
+  lyricsBy: Person[];
+  musicBy: Person[];
   album: {
     title: string;
+    year: number;
   };
+  video?: string;
 }
 
 export interface Song extends RawSong {
   path: string;
-  album: Link;
+  album: Link & { year: number };
+  videoId?: string;
 }
 
 export interface AppearsOn {

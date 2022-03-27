@@ -34,6 +34,10 @@ function songPath(song: { title: string }) {
   return "/songs/" + titleToSlug(song.title);
 }
 
+function videoId(url: string): string | undefined {
+  return url.match(/v=(\w+)$/)?.[1];
+}
+
 let allAlbums: Album[];
 export async function getAllAlbums(): Promise<Album[]> {
   if (allAlbums) return allAlbums;
@@ -41,22 +45,23 @@ export async function getAllAlbums(): Promise<Album[]> {
   const response = await fetchSanity<{ allAlbums: RawAlbum[] }>(`
     query Albums {
       allAlbums {
-        title,
-        spotify,
-        year,
+        title
+        spotify
+        year
         cover {
           asset {
             url
           }
-        },
+        }
         recordLabel {
-          name,
+          name
           homePage
-        },
+        }
         producer {
-          name,
-          homePage,
+          name
+          homePage
           sameAs
+          about
         }
         songs {
           title
@@ -96,10 +101,24 @@ export async function getAllSongs(): Promise<Song[]> {
   const response = await fetchSanity<{ allSongs: RawSong[] }>(`
     query Songs {
       allSongs {
-        title,
+        title
         lyrics
         album {
           title
+          year
+        }
+        video
+        lyricsBy {
+          name
+          homePage
+          sameAs
+          about
+        }
+        musicBy {
+          name
+          homePage
+          sameAs
+          about
         }
       }
     }`);
@@ -110,7 +129,9 @@ export async function getAllSongs(): Promise<Song[]> {
     album: {
       ...song.album,
       path: albumPath(song.album),
+      year: song.album.year,
     },
+    videoId: song.video && videoId(song.video),
   }));
 
   return allSongs;
@@ -126,14 +147,14 @@ export async function getAllAppearsOn() {
   const response = await fetchSanity<{ allAppearsOns: AppearsOn[] }>(`
     query Collaborations {
       allAppearsOns {
-        title,
-        year,
-        spotify,
+        title
+        year
+        spotify
         by {
-          about,
-          name,
-          homePage,
-          sameAs,
+          about
+          name
+          homePage
+          sameAs
         }
       }
     }`);
@@ -145,8 +166,8 @@ export async function getFrontMatter() {
   const response = await fetchSanity<{ allFrontMatters: FrontMatter }>(`
     query FrontMatter {
       allFrontMatters {
-        bodyRaw,
-        title,
+        bodyRaw
+        title
         image {
           asset {
             url
@@ -163,8 +184,8 @@ export async function getAllVideos() {
   const response = await fetchSanity<{ allVideos: RawVideo[] }>(`
     query Videos {
       allVideos {
-        title,
-        url,
+        title
+        url
       }
     }`);
 
