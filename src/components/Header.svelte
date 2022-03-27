@@ -20,15 +20,15 @@
           <a href="/" style="text-decoration: none"> Maria Due </a>
         </h1>
       </div>
-      <div class="menu">
+      <ul class="menu">
         {#each menuItems as item}
-          <div>
+          <li>
             <a href={item.link} class:active={url.pathname.includes(item.link)}
               >{item.label}</a
             >
-          </div>
+          </li>
         {/each}
-      </div>
+      </ul>
     </div>
 
     <div class="breadcrumb">
@@ -59,19 +59,36 @@
   .top-row {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: baseline;
     border-bottom: 2px solid var(--color-text);
-    padding-bottom: 12px;
+    padding-bottom: 4px;
     gap: 32px;
+  }
+
+  h1 {
+    white-space: nowrap;
   }
 
   .menu .active {
     font-weight: 700;
   }
 
-  div.menu > div {
-    margin-right: 8px;
-    font-size: 14px;
+  .menu {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap-reverse;
+    max-width: 60%;
+    margin-right: -8px;
+  }
+
+  .menu li {
+    font-size: calc((14 / 16) * 1rem);
+  }
+
+  .menu li a {
+    display: inline-block;
+    padding: 8px;
   }
 
   .breadcrumb {
@@ -93,11 +110,5 @@
   .breadcrumb .item::after {
     content: "〉";
     padding-left: 10px;
-  }
-
-  @media only screen and (min-width: 600px) {
-    div.menu > div {
-      display: inline;
-    }
   }
 </style>

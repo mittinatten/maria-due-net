@@ -38,11 +38,11 @@
   }
   ul.albums {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 32px;
   }
   .albums li {
-    flex: 1;
+    flex: 1 1 200px;
     list-style: none;
   }
 
@@ -52,12 +52,13 @@
     margin-bottom: 12px;
   }
 
-  @media (min-width: 550px) {
+  /* @media (min-width: 600px) {
     ul.albums {
       flex-direction: row;
+      flex-wrap: revert;
       gap: 20px;
     }
-  }
+  } */
 
   .collaborations li {
     list-style: none;

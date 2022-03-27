@@ -77,13 +77,8 @@
   }
 
   ul {
-    padding: 0;
     position: relative;
   }
-  li {
-    list-style: none;
-  }
-
   footer li {
     display: inline-block;
     font-size: calc((14 / 16) * 1rem);

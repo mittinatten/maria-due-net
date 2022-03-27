@@ -78,7 +78,7 @@ export async function getAllAlbums(): Promise<Album[]> {
         path: songPath(song),
       })),
     }))
-    .sort((a1: Album, a2: Album) => (a1.year > a2.year ? 1 : -1));
+    .sort((a1: Album, a2: Album) => (a1.year > a2.year ? -1 : 1));
 
   return allAlbums;
 }

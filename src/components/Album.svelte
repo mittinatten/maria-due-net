@@ -39,9 +39,15 @@
     width: 100%;
   }
 
+  ol {
+    padding-left: 2em;
+  }
+
   li {
+    list-style-type: revert;
     margin-bottom: 12px;
   }
+
   li a {
     padding: 4px;
   }
