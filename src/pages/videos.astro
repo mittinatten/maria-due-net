@@ -1,0 +1,9 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Videos from "../components/Videos.svelte";
+import { getAllVideos } from "../utils/data";
+const videos = await getAllVideos();
+---
+<BaseLayout title={"Maria Due - Music Videos"}>
+  <Videos {videos} />
+</BaseLayout>

@@ -1,3 +1,11 @@
+import { PortableTextBlocks } from "@portabletext/svelte/ptTypes";
+
+type SanityImage = {
+  asset: {
+    url: string;
+  };
+};
+
 export type Link = {
   title: string;
   path: string;
@@ -12,11 +20,7 @@ export interface RawAlbum {
     name: string;
     homePage: string;
   };
-  cover: {
-    asset: {
-      url: string;
-    };
-  };
+  cover: SanityImage;
   year: number;
   spotify: string;
   producer: {
@@ -55,4 +59,19 @@ export interface AppearsOn {
     homePage: string;
     sameAs: string;
   };
+}
+
+export interface FrontMatter {
+  bodyRaw: PortableTextBlocks;
+  title: string;
+  image?: SanityImage;
+}
+
+export interface RawVideo {
+  title: string;
+  url: string;
+}
+
+export interface Video extends RawVideo {
+  id: string;
 }

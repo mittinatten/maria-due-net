@@ -1,4 +1,11 @@
 ---
-import Index from '../components/Index.astro';
+import BaseLayout from "../layouts/BaseLayout.astro"
+import Index from "../components/Index.svelte"
+import { getFrontMatter } from "../utils/data";
+
+const frontMatter = await getFrontMatter();
 ---
-<Index />
+
+<BaseLayout>
+  <Index {frontMatter} />
+</BaseLayout>

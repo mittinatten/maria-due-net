@@ -5,7 +5,7 @@
 </script>
 
 <h2>{song.title}</h2>
-<div class="lyrics">{song.lyrics}</div>
+<div class="lyrics">{song.lyrics ?? "[Lyrics not available yet]"}</div>
 
 <style>
   .lyrics {

@@ -82,7 +82,6 @@
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 1.5rem;
   }
 
   .breadcrumb .item {

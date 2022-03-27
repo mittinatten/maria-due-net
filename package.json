@@ -12,6 +12,7 @@
     "astro": "^0.24.0"
   },
   "dependencies": {
-    "@astrojs/renderer-svelte": "^0.5.1"
+    "@astrojs/renderer-svelte": "^0.5.1",
+    "@portabletext/svelte": "^0.2.0"
   }
 }
