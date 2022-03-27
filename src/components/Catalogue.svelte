@@ -11,7 +11,7 @@
     <li>
       <a href={album.path}>
         <img src={album.cover.asset.url} alt="Album cover" />
-        {album.title}
+        {album.title} ({album.year})
       </a>
     </li>
   {/each}
@@ -37,12 +37,12 @@
     margin-bottom: 40px;
   }
   ul.albums {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 32px;
+    padding: 16px;
   }
   .albums li {
-    flex: 1 1 200px;
     list-style: none;
   }
 
@@ -51,14 +51,6 @@
     max-width: 100%;
     margin-bottom: 12px;
   }
-
-  /* @media (min-width: 600px) {
-    ul.albums {
-      flex-direction: row;
-      flex-wrap: revert;
-      gap: 20px;
-    }
-  } */
 
   .collaborations li {
     list-style: none;
