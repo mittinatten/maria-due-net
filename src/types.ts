@@ -75,3 +75,16 @@ export interface RawVideo {
 export interface Video extends RawVideo {
   id: string;
 }
+
+export interface RawConcert {
+  date: string;
+  venue: string;
+  venueURL?: string;
+  description: string;
+  eventURL?: string;
+  city: string;
+  tickets?: string;
+  country: string;
+}
+
+export type Concert = RawConcert & { date: Date };

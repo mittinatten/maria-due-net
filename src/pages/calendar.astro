@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Calendar from "../components/Calendar.svelte";
+import { getAllConcerts } from "../utils/data";
+
+const concerts = await getAllConcerts()
+---
+
+<BaseLayout>
+  <Calendar {concerts} />
+</BaseLayout>

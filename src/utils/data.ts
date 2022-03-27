@@ -1,3 +1,4 @@
+import { Concert, RawConcert } from "../types";
 import {
   RawAlbum,
   Album,
@@ -121,10 +122,7 @@ export async function getSongBySlug(slug: string): Promise<Song> {
   );
 }
 
-let allAppearsOn: AppearsOn[];
-export async function getAllAppearsOn(): Promise<AppearsOn[]> {
-  if (allAppearsOn) return allAppearsOn;
-
+export async function getAllAppearsOn() {
   const response = await fetchSanity<{ allAppearsOns: AppearsOn[] }>(`
     query Collaborations {
       allAppearsOns {
@@ -140,8 +138,7 @@ export async function getAllAppearsOn(): Promise<AppearsOn[]> {
       }
     }`);
 
-  allAppearsOn = response.allAppearsOns;
-  return allAppearsOn;
+  return response.allAppearsOns;
 }
 
 export async function getFrontMatter() {
@@ -164,12 +161,12 @@ export async function getFrontMatter() {
 
 export async function getAllVideos() {
   const response = await fetchSanity<{ allVideos: RawVideo[] }>(`
-  query Videos {
-    allVideos {
-      title,
-      url,
-    }
-  }`);
+    query Videos {
+      allVideos {
+        title,
+        url,
+      }
+    }`);
 
   const allVideos = response.allVideos.map((video) => {
     const id = video.url.match(/v=(\w+)$/)[1];
@@ -180,4 +177,32 @@ export async function getAllVideos() {
   });
 
   return allVideos;
+}
+
+export async function getAllConcerts() {
+  const response = await fetchSanity<{ allConcerts: RawConcert[] }>(`
+    query Concerts {
+      allConcerts {
+        date,
+        venue,
+        venueURL,
+        description,
+        eventURL,
+        city,
+        tickets,
+        country
+      }
+    }`);
+
+  const allConcerts = response.allConcerts
+    .map(
+      (concert) =>
+        ({
+          ...concert,
+          date: new Date(concert.date),
+        } as Concert)
+    )
+    .sort((a, b) => (a.date > b.date ? -1 : 1));
+
+  return allConcerts;
 }
