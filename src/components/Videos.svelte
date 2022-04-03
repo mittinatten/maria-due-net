@@ -3,12 +3,15 @@
   import VideoComponent from "./VideoComponent.svelte";
 
   export let videos: Video[];
+  export let origin: string;
 </script>
 
 <h2>Videos</h2>
 <div class="wrapper">
   {#each videos as video}
-    <VideoComponent {video} />
+    <div typeof="Video">
+      <VideoComponent {video} {origin} />
+    </div>
   {/each}
 </div>
 

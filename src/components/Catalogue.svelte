@@ -8,10 +8,11 @@
 <h2>Catalogue</h2>
 <ul class="albums">
   {#each albums as album (album.title)}
-    <li>
-      <a href={album.path}>
-        <img src={album.cover.asset.url} alt="Album cover" />
-        {album.title} ({album.year})
+    <li property="album" typeof="MusicAlbum" resource={album.resourceURI}>
+      <a href={album.path} property="mainEntityOfPage">
+        <img property="image" src={album.cover.asset.url} alt="Album cover" />
+        <span property="name">{album.title}</span>
+        (<span property="datePublished">{album.year}</span>)
       </a>
     </li>
   {/each}
@@ -19,10 +20,25 @@
 <h3>Collaborations</h3>
 <ul class="collaborations">
   {#each appearsOn as item}
-    <li>
-      <a href={item.spotify}><i class="fa fa-play-circle" /></a>
-      <a href={item.by.homePage}>{item.by.name}</a>:
-      <span class="title">{item.title}</span> ({item.year})
+    <li property="track" typeof="MusicRecording">
+      <a href={item.spotify} property="url" aria-label="Play song on spotify"
+        ><i class="fa fa-play-circle" /></a
+      >
+      <span property="byArtist" resource={item.by.sameAs} typeof="Artist">
+        {#if item.by.homePage}
+          <a href={item.by.homePage} property="url">
+            <span property="name">
+              {item.by.name}
+            </span>
+          </a>
+        {:else}
+          <span property="name">
+            {item.by.name}
+          </span>
+        {/if}
+      </span>:
+      <span class="title" property="name">{item.title}</span>
+      (<span property="datePublished">{item.year}</span>)
     </li>
   {/each}
 </ul>

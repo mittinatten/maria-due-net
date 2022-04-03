@@ -8,8 +8,8 @@
   font-family: "Roboto Slab", serif;
   font-size: 16px;
   font-size: 1rem;
-  --color-text: hsl(0, 0%, 10%);
-  --color-background: hsl(210, 9%, 98%);
+  --color-text: hsl(0, 0%, 15%);
+  --color-background: hsl(210, 9%, 99%);
   --fixed-width-font: "Roboto Mono", "Courier";
 }
 

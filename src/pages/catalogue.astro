@@ -3,9 +3,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Catalogue from "../components/Catalogue.svelte";
 import { getAllAlbums, getAllAppearsOn } from "../utils/data";
 
-const albums = await getAllAlbums()
+const albums = await getAllAlbums(Astro.request.canonicalURL.origin)
 const appearsOn = await getAllAppearsOn();
 ---
 <BaseLayout title="Maria Due - Catalogue">
-  <Catalogue {albums} {appearsOn}/>
+  <Catalogue {albums} {appearsOn}  />
 </BaseLayout>

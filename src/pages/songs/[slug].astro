@@ -1,20 +1,32 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Song from "../../components/Song.svelte";
-import { getSongBySlug, getAllSongs } from "../../utils/data";
+import { getSongBySlug, getAllSongs, getAlbumBySlug } from "../../utils/data";
 import { BreadCrumb } from "../../types";
 
+const { origin } = Astro.request.canonicalURL;
 const { slug } = Astro.request.params;
 
 export async function getStaticPaths() {
-  const songs = await getAllSongs();
+  const songs = await getAllSongs(Astro.site.origin);
   return songs.map(({ path }) => ({ params: { slug: path.split('/').pop() } }));
 };
 
-const song = await getSongBySlug(slug);
+const song = await getSongBySlug(slug, origin);
+const album = await getAlbumBySlug(song.album.path, origin);
 const breadCrumb: BreadCrumb = [{ ...song.album }, { ...song }]
 ---
 
-<BaseLayout title={"Maria Due - " + song.title + " (song)"} breadCrumb={breadCrumb}>
-  <Song {song} />
+<BaseLayout
+  title={"Maria Due - " + song.title + " (song)"}
+  breadCrumb={breadCrumb}
+  ogImage={album.cover.asset.url}
+  property="track"
+  typeOf="MusicRecording"
+  resource={song.resourceURI}
+  >
+  <div property="mainEntity" typeof="MusicRecording" />
+  <div property="recordingOf" typeof="MusicComposition" resource={song.resourceURI+"#composition"}>
+    <Song {song} {origin} />
+  </div>
 </BaseLayout>

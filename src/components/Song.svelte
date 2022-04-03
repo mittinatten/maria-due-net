@@ -1,48 +1,49 @@
 <script lang="ts">
   import { Song } from "../types";
+  import SongCreator from "./SongCreator.svelte";
   import VideoComponent from "./VideoComponent.svelte";
 
   export let song: Song;
-
-  let creator: string;
-
-  if (JSON.stringify(song.lyricsBy) === JSON.stringify(song.musicBy)) {
-    const lyricsByNames = song.lyricsBy.map((person) => person.name).join(", ");
-    creator = `<p className="credits">
-                Words and music by ${lyricsByNames}.
-            </p>`;
-  } else {
-    const lyricsByNames = song.lyricsBy
-      .map((person) => person.name)
-      .join(", ")
-      .replace(/,(?!.*,)/, " and");
-    const musicByNames = song.musicBy
-      .map((person) => person.name)
-      .join(", ")
-      .replace(/,(?!.*,)/, " and");
-    creator = `<p className="credits">
-        Composition by ${musicByNames}.<br />
-        Lyrics by ${lyricsByNames}.
-      </p>`;
-  }
+  export let origin: string;
 </script>
 
-<h2>{song.title}</h2>
-<div class="lyrics">{song.lyrics ?? "[Lyrics not available yet]"}</div>
+<h2 property="name">{song.title}</h2>
+{#if song.lyrics}
+  <div
+    property="lyrics"
+    typeof="CreativeWork"
+    resource={song.resourceURI + "#lyrics"}
+  >
+    <div class="lyrics" property="text">{song.lyrics}</div>
+  </div>
+{:else}
+  <div class="lyrics">{"[Lyrics not available yet]"}</div>
+{/if}
+
 <footer>
-  <p>
-    Song recorded by Maria Due in
-    {song.album.year}
+  <p property="inAlbum" typeof="MusicAlbum" resource={song.album.resourceURI}>
+    Song recorded by
+    <span property="byArtist" typeof="MusicGroup" resource={origin}>
+      <span property="name">Maria Due</span>
+    </span>
+    in
+    <span property="datePublished">{song.album.year}</span>
     on the album
-    <a href={song.album.path}>{song.album.title}</a>.
+    <a
+      href={song.album.path}
+      property="mainEntityOfPage"
+      resource={song.album.resourceURI}
+    >
+      <span property="name">{song.album.title}</span></a
+    >.
   </p>
-  <p>{@html creator}</p>
-  <p>Words</p>
+  <p><SongCreator {song} {origin} /></p>
   {#if song.video}
-    <div class="video">
+    <div class="video" property="video" typeof="VideoObject">
       <VideoComponent
         video={{ url: song.video, id: song.videoId, title: song.title }}
         showLink={false}
+        {origin}
       />
     </div>
   {/if}

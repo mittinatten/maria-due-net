@@ -16,6 +16,7 @@ export type Person = {
 export type Link = {
   title: string;
   path: string;
+  resourceURI?: string;
 };
 
 export type BreadCrumb = Link[];
@@ -36,13 +37,14 @@ export interface RawAlbum {
 export interface Album extends RawAlbum {
   path: string;
   songs: Link[];
+  resourceURI: string;
 }
 
 export interface RawSong {
   title: string;
   lyrics: string;
-  lyricsBy: Person[];
-  musicBy: Person[];
+  lyricsBy?: Person[];
+  musicBy?: Person[];
   album: {
     title: string;
     year: number;
@@ -54,6 +56,7 @@ export interface Song extends RawSong {
   path: string;
   album: Link & { year: number };
   videoId?: string;
+  resourceURI: string;
 }
 
 export interface AppearsOn {

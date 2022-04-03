@@ -39,7 +39,7 @@ function videoId(url: string): string | undefined {
 }
 
 let allAlbums: Album[];
-export async function getAllAlbums(): Promise<Album[]> {
+export async function getAllAlbums(origin: string): Promise<Album[]> {
   if (allAlbums) return allAlbums;
 
   const response = await fetchSanity<{ allAlbums: RawAlbum[] }>(`
@@ -81,22 +81,28 @@ export async function getAllAlbums(): Promise<Album[]> {
       songs: album.songs.map((song) => ({
         ...song,
         path: songPath(song),
+        resourceURI: origin + songPath,
       })),
+      resourceURI: origin + albumPath(album),
     }))
     .sort((a1: Album, a2: Album) => (a1.year > a2.year ? -1 : 1));
 
   return allAlbums;
 }
 
-export function getAlbumBySlug(lastPartOfSlug: string): Promise<Album> {
-  return getAllAlbums().then((albums) =>
+export function getAlbumBySlug(
+  lastPartOfSlug: string,
+  origin: string
+): Promise<Album> {
+  return getAllAlbums(origin).then((albums) =>
     albums.find((album) => album.path.endsWith(lastPartOfSlug))
   );
 }
 
 let allSongs: Song[];
-export async function getAllSongs(): Promise<Song[]> {
+export async function getAllSongs(origin: string): Promise<Song[]> {
   if (allSongs) return allSongs;
+  console.log(origin);
 
   const response = await fetchSanity<{ allSongs: RawSong[] }>(`
     query Songs {
@@ -126,9 +132,11 @@ export async function getAllSongs(): Promise<Song[]> {
   allSongs = response.allSongs.map((song) => ({
     ...song,
     path: songPath(song),
+    resourceURI: origin + songPath(song),
     album: {
       ...song.album,
       path: albumPath(song.album),
+      resourceURI: origin + albumPath(song.album),
       year: song.album.year,
     },
     videoId: song.video && videoId(song.video),
@@ -137,8 +145,11 @@ export async function getAllSongs(): Promise<Song[]> {
   return allSongs;
 }
 
-export async function getSongBySlug(slug: string): Promise<Song> {
-  return getAllSongs().then((songs) =>
+export async function getSongBySlug(
+  slug: string,
+  origin: string
+): Promise<Song> {
+  return getAllSongs(origin).then((songs) =>
     songs.find((song) => song.path.endsWith(slug))
   );
 }
@@ -159,7 +170,7 @@ export async function getAllAppearsOn() {
       }
     }`);
 
-  return response.allAppearsOns;
+  return response.allAppearsOns.sort((a, b) => (a.year > b.year ? -1 : 1));
 }
 
 export async function getFrontMatter() {

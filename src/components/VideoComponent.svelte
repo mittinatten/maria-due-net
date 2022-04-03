@@ -3,9 +3,11 @@
 
   export let video: Video;
   export let showLink = true;
+  export let origin: string;
 </script>
 
 <div class="wrapper">
+  <span property="musicBy" typeof="MusicGroup" resource={origin} />
   <div class="iframe-wrapper">
     <iframe
       allow-fullscreen="allowfullscreen"
@@ -20,9 +22,9 @@
       frameBorder="0"
     />
   </div>
-  {#if showLink}
-    <p><a href={video.url}>{video.title}</a></p>
-  {/if}
+  <p style={showLink ? "display: none" : undefined}>
+    <a href={video.url} property="url">{video.title}</a>
+  </p>
 </div>
 
 <style>

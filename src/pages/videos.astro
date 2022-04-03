@@ -5,5 +5,5 @@ import { getAllVideos } from "../utils/data";
 const videos = await getAllVideos();
 ---
 <BaseLayout title={"Maria Due - Music Videos"}>
-  <Videos {videos} />
+  <Videos {videos} origin={Astro.request.canonicalURL.origin} />
 </BaseLayout>

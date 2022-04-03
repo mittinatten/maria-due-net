@@ -16,8 +16,8 @@
   <nav>
     <div class="top-row">
       <div class="title">
-        <h1 style="margin: 0">
-          <a href="/" style="text-decoration: none"> Maria Due </a>
+        <h1 style="margin: 0" property="name">
+          <a href="/" style="text-decoration: none">Maria Due</a>
         </h1>
       </div>
       <ul class="menu">
