@@ -5,7 +5,7 @@
   export let appearsOn: AppearsOn[];
 </script>
 
-<h2>Catalogue</h2>
+<h2>Albums</h2>
 <ul class="albums">
   {#each albums as album (album.title)}
     <li property="album" typeof="MusicAlbum" resource={album.resourceURI}>
@@ -17,7 +17,7 @@
     </li>
   {/each}
 </ul>
-<h3>Collaborations</h3>
+<h2>Collaborations</h2>
 <ul class="collaborations">
   {#each appearsOn as item}
     <li property="track" typeof="MusicRecording">
@@ -56,7 +56,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 32px;
-    padding: 16px;
   }
   .albums li {
     list-style: none;

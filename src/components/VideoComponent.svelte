@@ -22,7 +22,7 @@
       frameBorder="0"
     />
   </div>
-  <p style={showLink ? "display: none" : undefined}>
+  <p style={showLink ? undefined : "display: none"}>
     <a href={video.url} property="url">{video.title}</a>
   </p>
 </div>

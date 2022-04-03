@@ -12,66 +12,74 @@
   (<span property="datePublished">{album.year}</span>)
 </h2>
 <div class="cover-song-list">
-  <div>
+  <div class="cover">
     <img src={album.cover.asset.url} alt="Album cover" property="image" />
-  </div>
-  <ol>
-    {#each album.songs as song}
-      <li property="track" typeof="MusicRecording">
-        <a href={song.path} property="mainEntityOfPage">
-          <span property="name">{song.title}</span>
+    <p property="producer" typeof="Person" resource={album.producer.sameAs}>
+      Produced by
+      {#if album.producer.homePage}
+        <a href={album.producer.homePage} property="url">
+          <span property="name">{album.producer.name}</span>
         </a>
-      </li>
-    {/each}
-  </ol>
+      {:else}
+        <span property="name">{album.producer.name}</span>
+      {/if}
+    </p>
+  </div>
+  <div class="songs">
+    <h3>Songs</h3>
+    <ol>
+      {#each album.songs as song}
+        <li property="track" typeof="MusicRecording">
+          <a href={song.path} property="mainEntityOfPage"
+            ><span property="name">{song.title}</span>
+          </a>
+        </li>
+      {/each}
+    </ol>
+  </div>
 </div>
-<p property="producer" typeof="Person" resource={album.producer.sameAs}>
-  Produced by
-  {#if album.producer.homePage}
-    <a href={album.producer.homePage} property="url">
-      <span property="name">{album.producer.name}</span>
-    </a>
-  {:else}
-    <span property="name">{album.producer.name}</span>
-  {/if}
-</p>
 
 <style>
   h2 a {
     margin-right: 0.5rem;
   }
+  h3 {
+    margin-top: 0;
+    margin-left: 1rem;
+  }
 
   .cover-song-list {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 16px;
     position: relative;
-    width: 100%;
+  }
+
+  .cover {
+    max-width: 400px;
+  }
+
+  .songs {
+    min-width: 200px;
   }
 
   img {
-    width: 100%;
+    max-width: 100%;
+    display: block;
+    margin-bottom: 12px;
   }
 
   ol {
-    padding-left: 2em;
+    padding-left: 2rem;
   }
 
   li {
     list-style-type: revert;
-    margin-bottom: 12px;
+    margin-bottom: 4px;
   }
 
   li a {
+    display: inline-flex;
     padding: 4px;
-  }
-
-  @media (min-width: 600px) {
-    .cover-song-list {
-      flex-direction: row;
-    }
-    .cover-song-list > * {
-      flex: 1 1 50%;
-    }
   }
 </style>

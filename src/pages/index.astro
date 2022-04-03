@@ -1,11 +1,11 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro"
-import Index from "../components/Index.svelte"
-import { getFrontMatter } from "../utils/data";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Catalogue from "../components/Catalogue.svelte";
+import { getAllAlbums, getAllAppearsOn } from "../utils/data";
 
-const frontMatter = await getFrontMatter();
+const albums = await getAllAlbums(Astro.request.canonicalURL.origin)
+const appearsOn = await getAllAppearsOn();
 ---
-
-<BaseLayout>
-  <Index {frontMatter} />
+<BaseLayout title="Maria Due - Catalogue">
+  <Catalogue {albums} {appearsOn}  />
 </BaseLayout>

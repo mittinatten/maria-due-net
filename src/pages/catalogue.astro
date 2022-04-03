@@ -1,11 +1,3 @@
----
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Catalogue from "../components/Catalogue.svelte";
-import { getAllAlbums, getAllAppearsOn } from "../utils/data";
-
-const albums = await getAllAlbums(Astro.request.canonicalURL.origin)
-const appearsOn = await getAllAppearsOn();
----
-<BaseLayout title="Maria Due - Catalogue">
-  <Catalogue {albums} {appearsOn}  />
-</BaseLayout>
+<head>
+    <meta http-equiv="refresh" content="0; url=/" />
+</head>

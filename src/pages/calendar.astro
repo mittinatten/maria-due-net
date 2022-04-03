@@ -7,5 +7,5 @@ const concerts = await getAllConcerts()
 ---
 
 <BaseLayout>
-  <Calendar {concerts} />
+  <Calendar {concerts} origin={Astro.request.canonicalURL.href}/>
 </BaseLayout>

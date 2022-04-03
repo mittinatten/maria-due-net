@@ -2,6 +2,7 @@
   import { Concert } from "../types";
 
   export let concerts: Concert[];
+  export let origin: string;
 
   function formatDate(date: Date) {
     const y = date.getFullYear();
@@ -9,27 +10,47 @@
     const d = date.getDate().toString().padStart(2, "0");
     return `${y}-${m}-${d}`;
   }
+
+  const venueResource = (concert: Concert) =>
+    origin + "#" + concert.venue.replace(" ", "-");
 </script>
 
 <h2>Calendar</h2>
 
 <ul class="concerts">
   {#each concerts as concert}
-    <li>
+    <li typeof="Event">
+      <span property="performer" resource={origin} />
       <article>
         <div class="description">
-          <h3>{concert.venue}</h3>
-          <p>{concert.description}</p>
+          <h3
+            property="location"
+            typeof="Place"
+            resource={venueResource(concert)}
+          >
+            <span property="name">{concert.venue}</span>
+          </h3>
+          <p property="description">{concert.description}</p>
           <footer>
             <ul>
               {#if concert.tickets}
-                <li><a href={concert.tickets} target="_blank">Tickets</a></li>
+                <li property="offers" typeof="Offer">
+                  <a property="url" href={concert.tickets} target="_blank"
+                    >Tickets</a
+                  >
+                </li>
               {/if}
               {#if concert.eventURL}
-                <li><a href={concert.eventURL}>Event</a></li>
+                <li><a property="url" href={concert.eventURL}>Event</a></li>
               {/if}
               {#if concert.venueURL}
-                <li><a href={concert.venueURL}>Venue</a></li>
+                <li
+                  property="location"
+                  typeof="Place"
+                  resource={venueResource(concert)}
+                >
+                  <a property="url" href={concert.venueURL}>Venue</a>
+                </li>
               {/if}
             </ul>
           </footer>

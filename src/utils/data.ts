@@ -102,7 +102,6 @@ export function getAlbumBySlug(
 let allSongs: Song[];
 export async function getAllSongs(origin: string): Promise<Song[]> {
   if (allSongs) return allSongs;
-  console.log(origin);
 
   const response = await fetchSanity<{ allSongs: RawSong[] }>(`
     query Songs {
@@ -171,24 +170,6 @@ export async function getAllAppearsOn() {
     }`);
 
   return response.allAppearsOns.sort((a, b) => (a.year > b.year ? -1 : 1));
-}
-
-export async function getFrontMatter() {
-  const response = await fetchSanity<{ allFrontMatters: FrontMatter }>(`
-    query FrontMatter {
-      allFrontMatters {
-        bodyRaw
-        title
-        image {
-          asset {
-            url
-          }
-        }
-      }
-    }
-  `);
-
-  return response.allFrontMatters;
 }
 
 export async function getAllVideos() {

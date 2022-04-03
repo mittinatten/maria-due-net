@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 };
 
 const album = await getAlbumBySlug(slug, Astro.request.canonicalURL.origin);
-const breadCrumb: BreadCrumb = [{ path: "/catalogue", title: "Albums"}, album ];
+const breadCrumb: BreadCrumb = [{ path: "/", title: "Albums"}, album ];
 ---
 
 <BaseLayout

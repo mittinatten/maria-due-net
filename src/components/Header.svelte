@@ -5,7 +5,7 @@
   export let breadCrumb: BreadCrumb;
 
   const menuItems = [
-    { link: "/catalogue/", label: "Catalogue" },
+    { link: "/", label: "Catalogue" },
     { link: "/calendar/", label: "Calendar" },
     { link: "/videos/", label: "Videos" },
     { link: "/about/", label: "About" },
@@ -23,7 +23,7 @@
       <ul class="menu">
         {#each menuItems as item}
           <li>
-            <a href={item.link} class:active={url.pathname.includes(item.link)}
+            <a href={item.link} class:active={url.pathname === item.link}
               >{item.label}</a
             >
           </li>

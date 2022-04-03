@@ -70,13 +70,6 @@ export interface AppearsOn {
     sameAs: string;
   };
 }
-
-export interface FrontMatter {
-  bodyRaw: PortableTextBlocks;
-  title: string;
-  image?: SanityImage;
-}
-
 export interface RawVideo {
   title: string;
   url: string;
