@@ -31,6 +31,12 @@ const { url, canonicalURL  } = Astro.request;
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto+Mono:ital,wght@1,300&family=Roboto+Slab:wght@400;700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css">
+  <script>
+    if (navigator.serviceWorker) {
+      // clean up earlier version of site
+      navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister()));
+    }
+  </script>
 </head>
 
 <body vocab="http://schema.org/" typeof="MusicGroup" resource={canonicalURL.origin}>
