@@ -21,16 +21,18 @@ const { url, canonicalURL  } = Astro.request;
 	<meta name="viewport" content="width=device-width">
   <meta name="google-site-verification" content="zo-B2TdZe7lSw-ZoS0usXLKmwI380HjWKWlsSzFKVa8">
 	<title>{title}</title>
+  <meta name="description" content="Artist site for Maria Due">
   <link rel="canonical" href={canonicalURL}>
   <link rel="shortcut icon" href="/assets/icon-48x48.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="og:image" href={ogImage} />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto+Mono:ital,wght@1,300&family=Roboto+Slab:wght@400;700&display=swap">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css">
 </head>
+
 <body vocab="http://schema.org/" typeof="MusicGroup" resource={canonicalURL.origin}>
   <div style="display: none">
     <span property="sameAs">https://www.wikidata.org/wiki/Q17143368</span>

@@ -55,6 +55,7 @@
   ul.albums {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(300px, 60%));
     gap: var(--large-gap);
   }
   .albums li {
@@ -65,6 +66,7 @@
   .albums li a img {
     display: block;
     max-width: 100%;
+    max-height: 100%;
     margin-bottom: 12px;
   }
   .collaborations li {
