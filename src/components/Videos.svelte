@@ -19,6 +19,6 @@
   .wrapper {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 24px;
+    gap: 32px;
   }
 </style>

@@ -55,10 +55,11 @@
   ul.albums {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 32px;
+    gap: var(--large-gap);
   }
   .albums li {
     list-style: none;
+    padding-bottom: var(--small-gap);
   }
 
   .albums li a img {
@@ -66,7 +67,6 @@
     max-width: 100%;
     margin-bottom: 12px;
   }
-
   .collaborations li {
     list-style: none;
     margin-bottom: 12px;

@@ -4,13 +4,20 @@
   export let album: Album;
 </script>
 
-<h2>
-  <a href={album.spotify} aria-label="Play album on spotify" property="url">
+<header>
+  <h2>
+    <span property="name">{album.title}</span>
+  </h2>
+  <a
+    href={album.spotify}
+    aria-label="Play album on spotify"
+    property="url"
+    class="play"
+  >
     <i class="fa fa-play-circle" />
   </a>
-  <span property="name">{album.title}</span>
-  (<span property="datePublished">{album.year}</span>)
-</h2>
+</header>
+
 <div class="cover-song-list">
   <div class="cover">
     <img src={album.cover.asset.url} alt="Album cover" property="image" />
@@ -23,6 +30,7 @@
       {:else}
         <span property="name">{album.producer.name}</span>
       {/if}
+      (<span property="datePublished">{album.year}</span>).
     </p>
   </div>
   <div class="songs">
@@ -40,18 +48,22 @@
 </div>
 
 <style>
-  h2 a {
-    margin-right: 0.5rem;
+  header {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    font-size: var(--h2-font-size);
+    gap: 0.5em;
+    align-items: baseline;
   }
   h3 {
     margin-top: 0;
-    margin-left: 1rem;
   }
 
   .cover-song-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: clamp(16px, 16px + 2vw, 32px);
     position: relative;
   }
 
@@ -70,7 +82,7 @@
   }
 
   ol {
-    padding-left: 2rem;
+    padding-left: 1rem;
   }
 
   li {

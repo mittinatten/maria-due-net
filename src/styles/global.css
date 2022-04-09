@@ -11,6 +11,10 @@
   --color-text: hsl(0, 0%, 15%);
   --color-background: hsl(210, 9%, 99%);
   --fixed-width-font: "Roboto Mono", "Courier";
+  --h2-font-size: clamp(1.6rem, 2vw + 1rem, 2rem);
+  --h3-font-size: clamp(1.25rem, 2vw + 1rem, 1.6rem);
+  --large-gap: clamp(16px, 4vw, 32px);
+  --small-gap: clamp(8px, 2vw, 16px);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -31,25 +35,19 @@ h5 {
 }
 
 h2 {
-  font-size: clamp(1.2rem, 3vw + 1rem, 2rem);
+  font-size: var(--h2-font-size);
 }
 
 h3 {
-  font-size: clamp(1.1rem, 2vw + 1rem, 1.6rem);
+  font-size: var(--h3-font-size);
 }
 
 body {
-  padding: 1rem;
+  padding: var(--large-gap);
   width: 100%;
   min-height: 100vh;
   background: var(--color-background);
   color: var(--color-text);
-}
-
-@media (min-width: 600px) {
-  body {
-    padding: 2rem;
-  }
 }
 
 main,
