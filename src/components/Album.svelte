@@ -10,9 +10,10 @@
   </h2>
   <a
     href={album.spotify}
-    aria-label="Play album on spotify"
+    aria-label="Play album on Spotify"
     property="url"
     class="play"
+    title="Play album on Spotify"
   >
     <i class="fa fa-play-circle" />
   </a>

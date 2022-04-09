@@ -48,9 +48,6 @@
   a {
     text-decoration: none;
   }
-  a:active {
-    font-weight: bold;
-  }
 
   nav {
     margin: 0 auto;
@@ -69,8 +66,17 @@
     white-space: nowrap;
   }
 
+  .menu a:active,
+  .menu a:focus,
+  .menu a:hover {
+    text-decoration: underline;
+    transition: 0.2s;
+  }
+
+  .menu a:active,
   .menu .active {
     font-weight: 700;
+    transition: 0.2s;
   }
 
   .menu {

@@ -9,6 +9,7 @@
   font-size: 16px;
   font-size: 1rem;
   --color-text: hsl(0, 0%, 15%);
+  --color-primary: hsl(287, 81%, 40%);
   --color-background: hsl(210, 9%, 99%);
   --fixed-width-font: "Roboto Mono", "Courier";
   --h2-font-size: clamp(1.6rem, 2vw + 1rem, 2rem);
@@ -21,6 +22,7 @@
   :root {
     --color-text: hsl(210, 9%, 95%);
     --color-background: hsl(0, 0%, 5%);
+    --color-primary: hsl(287, 100%, 63%);
   }
 }
 
@@ -68,6 +70,11 @@ main {
 
 a {
   color: var(--color-text);
+}
+
+a:hover {
+  color: var(--color-primary);
+  transition: 0.2s;
 }
 
 li {
