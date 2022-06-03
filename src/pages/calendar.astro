@@ -4,8 +4,9 @@ import Calendar from "../components/Calendar.svelte";
 import { getAllConcerts } from "../utils/data";
 
 const concerts = await getAllConcerts()
+const { canonicalURL } = Astro.request;
 ---
 
 <BaseLayout>
-  <Calendar {concerts} origin={Astro.request.canonicalURL.href}/>
+  <Calendar {concerts} origin={canonicalURL.href} baseURL={canonicalURL.origin} />
 </BaseLayout>

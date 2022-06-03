@@ -12,15 +12,17 @@ const {
   typeOf,
   resource }
   = Astro.props;
-const { url, canonicalURL  } = Astro.request;
+const { url, canonicalURL } = Astro.request;
 
 ---
+
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
   <meta name="google-site-verification" content="zo-B2TdZe7lSw-ZoS0usXLKmwI380HjWKWlsSzFKVa8">
-	<title>{title}</title>
+  <title>{title}</title>
   <meta name="description" content="Artist site for Maria Due">
   <link rel="canonical" href={canonicalURL}>
   <link rel="shortcut icon" href="/assets/icon-48x48.png">
@@ -28,7 +30,8 @@ const { url, canonicalURL  } = Astro.request;
   <link rel="og:image" href={ogImage} />
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto+Mono:ital,wght@1,300&family=Roboto+Slab:wght@400;700&display=swap">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto+Mono:ital,wght@1,300&family=Roboto+Slab:wght@400;700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css">
   <script>
@@ -41,6 +44,7 @@ const { url, canonicalURL  } = Astro.request;
 
 <body vocab="http://schema.org/" typeof="MusicGroup" resource={canonicalURL.origin}>
   <div style="display: none">
+    <span property="name">Maria Due</span>
     <span property="sameAs">https://www.wikidata.org/wiki/Q17143368</span>
     <span property="sameAs">https://viaf.org/viaf/73145971487332332164/</span>
     <span property="sameAs">https://no.wikipedia.org/wiki/Maria_Due</span>
@@ -50,4 +54,5 @@ const { url, canonicalURL  } = Astro.request;
     <slot />
   </main>
 </body>
+
 </html>

@@ -3,6 +3,7 @@
 
   export let concerts: Concert[];
   export let origin: string;
+  export let baseURL: string;
 
   function formatDate(date: Date) {
     const y = date.getFullYear();
@@ -20,7 +21,8 @@
 <ul class="concerts">
   {#each concerts as concert}
     <li typeof="Event">
-      <span property="performer" resource={origin} />
+      <span property="performer" resource={baseURL} />
+      <span property="name" content={`Maria Due at ${concert.venue}`} />
       <article>
         <div class="description">
           <h3
@@ -56,7 +58,9 @@
           </footer>
         </div>
         <div class="date-and-city">
-          <div class="date">{formatDate(concert.date)}</div>
+          <div class="date" property="startDate">
+            {formatDate(concert.date)}
+          </div>
           <div class="city">{concert.city}, {concert.country}</div>
         </div>
       </article>
