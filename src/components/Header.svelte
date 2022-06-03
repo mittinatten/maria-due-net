@@ -31,11 +31,15 @@
       </ul>
     </div>
 
-    <div class="breadcrumb">
+    <ol class="breadcrumbs" typeof="BreadcrumbList">
       {#each breadCrumb.filter((item) => !!item.path) as item}
-        <a class="item" href={item.path}>{item.title}</a>
+        <li property="itemListElement" typeof="ListItem">
+          <a class="item" href={item.path} property="url">
+            <span property="name">{item.title}</span>
+          </a>
+        </li>
       {/each}
-    </div>
+    </ol>
   </nav>
 </header>
 
@@ -97,7 +101,7 @@
     padding: 6px 8px;
   }
 
-  .breadcrumb {
+  .breadcrumbs {
     font-size: 0.8rem;
     text-transform: uppercase;
     margin-top: 12px;
@@ -107,13 +111,17 @@
     text-overflow: ellipsis;
   }
 
-  .breadcrumb .item {
+  .breadcrumbs li {
+    display: inline;
+  }
+
+  .breadcrumbs .item {
     padding: 8px 2px;
     white-space: nowrap;
     overflow: hidden;
   }
 
-  .breadcrumb .item::after {
+  .breadcrumbs .item::after {
     content: "〉";
     padding-left: 10px;
   }
