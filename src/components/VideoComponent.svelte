@@ -8,6 +8,11 @@
 
 <div class="wrapper">
   <span property="musicBy" typeof="MusicGroup" resource={origin} />
+  <span property="description" content="Music video by Maria Due" />
+  <span
+    property="thumbnailUrl"
+    content={`https://img.youtube.com/vi/${video.id}/0.jpg`}
+  />
   <div class="iframe-wrapper">
     <iframe
       allow-fullscreen="allowfullscreen"
@@ -23,7 +28,9 @@
     />
   </div>
   <p style={showLink ? undefined : "display: none"}>
-    <a href={video.url} property="url">{video.title}</a>
+    <a href={video.url} property="url">
+      <span property="name">{video.title}</span>
+    </a>
   </p>
 </div>
 
