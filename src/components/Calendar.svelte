@@ -13,16 +13,23 @@
   }
 
   const venueResource = (concert: Concert) =>
-    origin + "#" + concert.venue.replace(" ", "-");
+    origin + "#venue--" + concert.venue.replaceAll(" ", "-");
+
+  const eventResource = (concert: Concert) =>
+    origin +
+    "#event--" +
+    concert.venue.replaceAll(" ", "-") +
+    "-" +
+    formatDate(concert.date);
 </script>
 
 <h2>Calendar</h2>
 
 <ul class="concerts">
   {#each concerts as concert}
-    <li typeof="Event">
-      <span property="performer" resource={baseURL} />
-      <span property="name" content={`Maria Due at ${concert.venue}`} />
+    <li typeof="Event" resource={eventResource(concert)}>
+      <meta property="performer" resource={baseURL} />
+      <meta property="name" content={`Maria Due at ${concert.venue}`} />
       <article>
         <div class="description">
           <h3

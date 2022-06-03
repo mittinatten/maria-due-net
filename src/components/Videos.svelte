@@ -9,9 +9,7 @@
 <h2>Videos</h2>
 <div class="wrapper">
   {#each videos as video}
-    <div typeof="Video">
-      <VideoComponent {video} {origin} />
-    </div>
+    <VideoComponent {video} {origin} />
   {/each}
 </div>
 

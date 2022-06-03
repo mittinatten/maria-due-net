@@ -43,12 +43,10 @@ const { url, canonicalURL } = Astro.request;
 </head>
 
 <body vocab="http://schema.org/" typeof="MusicGroup" resource={canonicalURL.origin}>
-  <div style="display: none">
-    <span property="name">Maria Due</span>
-    <span property="sameAs">https://www.wikidata.org/wiki/Q17143368</span>
-    <span property="sameAs">https://viaf.org/viaf/73145971487332332164/</span>
-    <span property="sameAs">https://no.wikipedia.org/wiki/Maria_Due</span>
-  </div>
+  <meta property="name" content="Maria Due">
+  <meta property="sameAs" resource="https://www.wikidata.org/wiki/Q17143368" />
+  <meta property="sameAs" resource="https://viaf.org/viaf/73145971487332332164/" />
+  <meta property="sameAs" resource="https://no.wikipedia.org/wiki/Maria_Due" />
   <Header {breadCrumb} {url} />
   <main {property} typeof={typeOf} {resource}>
     <slot />

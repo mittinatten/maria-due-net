@@ -4,12 +4,23 @@
   export let video: Video;
   export let showLink = true;
   export let origin: string;
+
+  const id =
+    origin + "/#video--" + video.title.replaceAll(" ", "-").toLowerCase();
+
+  const embedUrl =
+    "https://www.youtube.com/embed/" +
+    video.id +
+    "?autoplay=0&modestbranding=1";
 </script>
 
-<div class="wrapper">
-  <span property="musicBy" typeof="MusicGroup" resource={origin} />
-  <span property="description" content="Music video by Maria Due" />
-  <span
+<div class="wrapper" resource={id} typeof="VideoObject">
+  <meta property="musicBy" typeof="MusicGroup" resource={origin} />
+  <meta property="description" content="Music video by Maria Due" />
+  <meta property="contentUrl url" content={video.url} />
+  <meta property="embedUrl" content={embedUrl} />
+  <meta property="name" content={video.title} />
+  <meta
     property="thumbnailUrl"
     content={`https://img.youtube.com/vi/${video.id}/0.jpg`}
   />
@@ -20,17 +31,13 @@
       type="text/html"
       width="640"
       height="360"
-      src={"https://www.youtube.com/embed/" +
-        video.id +
-        "?autoplay=0&modestbranding=1"}
+      src={embedUrl}
       title={video.title}
       frameBorder="0"
     />
   </div>
   <p style={showLink ? undefined : "display: none"}>
-    <a href={video.url} property="url">
-      <span property="name">{video.title}</span>
-    </a>
+    <a href={video.url}><span>{video.title}</span></a>
   </p>
 </div>
 
