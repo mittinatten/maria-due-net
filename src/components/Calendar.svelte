@@ -58,7 +58,7 @@
           </footer>
         </div>
         <div class="date-and-city">
-          <div class="date" property="startDate">
+          <div class="date" property="startDate endDate">
             {formatDate(concert.date)}
           </div>
           <div class="city">{concert.city}, {concert.country}</div>
