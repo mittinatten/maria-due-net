@@ -31,15 +31,17 @@
       </ul>
     </div>
 
-    <ol class="breadcrumbs" typeof="BreadcrumbList">
-      {#each breadCrumb.filter((item) => !!item.path) as item}
-        <li property="itemListElement" typeof="ListItem">
-          <a class="item" href={item.path} property="url">
-            <span property="name">{item.title}</span>
-          </a>
-        </li>
-      {/each}
-    </ol>
+    {#if breadCrumb?.length}
+      <ol class="breadcrumbs" typeof="BreadcrumbList">
+        {#each breadCrumb.filter((item) => !!item.path) as item}
+          <li property="itemListElement" typeof="ListItem">
+            <a class="item" href={item.path} property="url">
+              <span property="name">{item.title}</span>
+            </a>
+          </li>
+        {/each}
+      </ol>
+    {/if}
   </nav>
 </header>
 
