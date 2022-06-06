@@ -1,4 +1,5 @@
 ---
+import fontsCSS from './fonts.css';
 import "../styles/global.css";
 
 import Header from "../components/Header.svelte";
@@ -28,11 +29,7 @@ const { url, canonicalURL } = Astro.request;
   <link rel="shortcut icon" href="/assets/icon-48x48.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="og:image" href={ogImage} />
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto+Mono:ital,wght@1,300&family=Roboto+Slab:wght@400;700&display=swap">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/solid.min.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css">
   <script>
     if (navigator.serviceWorker) {
@@ -40,6 +37,8 @@ const { url, canonicalURL } = Astro.request;
       navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister()));
     }
   </script>
+  <style is:inline set:html={fontsCSS}>
+  </style>
 </head>
 
 <body vocab="http://schema.org/" typeof="MusicGroup" resource={canonicalURL.origin}>
