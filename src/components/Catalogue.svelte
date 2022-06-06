@@ -10,7 +10,10 @@
   {#each albums as album (album.title)}
     <li property="album" typeof="MusicAlbum" resource={album.resourceURI}>
       <a href={album.path} property="mainEntityOfPage">
-        <img property="image" src={album.cover.asset.url} alt="Album cover" />
+        <picture>
+          <source type="image/webp" srcset={album.cover.asset.webp} />
+          <img property="image" src={album.cover.asset.url} alt="Album cover" />
+        </picture>
         <span property="name">{album.title}</span>
         (<span property="datePublished">{album.year}</span>)
       </a>

@@ -21,7 +21,10 @@
 
 <div class="cover-song-list">
   <div class="cover">
-    <img src={album.cover.asset.url} alt="Album cover" property="image" />
+    <picture>
+      <source type="image/webp" srcset={album.cover.asset.webp} />
+      <img src={album.cover.asset.url} alt="Album cover" property="image" />
+    </picture>
     <p property="producer" typeof="Person" resource={album.producer.sameAs}>
       Produced by
       {#if album.producer.homePage}

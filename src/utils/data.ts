@@ -5,7 +5,6 @@ import {
   RawSong,
   Song,
   AppearsOn,
-  FrontMatter,
   Video,
   RawVideo,
 } from "../types";
@@ -36,6 +35,10 @@ function songPath(song: { title: string }) {
 
 function videoId(url: string): string | undefined {
   return url.match(/v=(\w+)$/)?.[1];
+}
+
+function generateWebpUrl(url: string): string {
+  return url + "?fm=webp";
 }
 
 let allAlbums: Album[];
@@ -84,6 +87,12 @@ export async function getAllAlbums(origin: string): Promise<Album[]> {
         resourceURI: origin + songPath,
       })),
       resourceURI: origin + albumPath(album),
+      cover: {
+        asset: {
+          url: album.cover.asset.url,
+          webp: generateWebpUrl(album.cover.asset.url),
+        },
+      },
     }))
     .sort((a1: Album, a2: Album) => (a1.year > a2.year ? -1 : 1));
 

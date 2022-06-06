@@ -3,6 +3,7 @@ import { PortableTextBlocks } from "@portabletext/svelte/ptTypes";
 type SanityImage = {
   asset: {
     url: string;
+    webp: string;
   };
 };
 
