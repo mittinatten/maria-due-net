@@ -35,7 +35,7 @@
       <ol class="breadcrumbs" typeof="BreadcrumbList">
         {#each breadCrumb.filter((item) => !!item.path) as item, position}
           <li property="itemListElement" typeof="ListItem">
-            <meta property="position" content={position} />
+            <meta property="position" content={position.toString()} />
             <a class="item" href={item.path} property="url">
               <span property="name">{item.title}</span>
             </a>
