@@ -25,6 +25,10 @@ function titleToSlug(title: string) {
   return title.replace(/ /g, "-").toLowerCase();
 }
 
+export function pathToSlug(slug: string) {
+  return slug.split("/").slice(0, -1).pop();
+}
+
 function albumPath(album: { title: string }) {
   return "/albums/" + titleToSlug(album.title) + "/";
 }
@@ -104,7 +108,7 @@ export function getAlbumBySlug(
   origin: string
 ): Promise<Album> {
   return getAllAlbums(origin).then((albums) =>
-    albums.find((album) => album.path.endsWith(lastPartOfSlug))
+    albums.find((album) => album.path.endsWith(lastPartOfSlug + "/"))
   );
 }
 
@@ -158,7 +162,7 @@ export async function getSongBySlug(
   origin: string
 ): Promise<Song> {
   return getAllSongs(origin).then((songs) =>
-    songs.find((song) => song.path.endsWith(slug))
+    songs.find((song) => song.path.endsWith(slug + "/"))
   );
 }
 

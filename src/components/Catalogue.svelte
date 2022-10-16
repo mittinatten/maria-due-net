@@ -76,7 +76,7 @@
     list-style: none;
     margin-bottom: 12px;
   }
-  .collaborations i {
+  .collaborations :global(i) {
     width: 1.5em;
     text-align: center;
   }

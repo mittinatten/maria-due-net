@@ -4,7 +4,7 @@ import Calendar from "../components/Calendar.svelte";
 import { getAllConcerts } from "../utils/data";
 
 const concerts = await getAllConcerts()
-const { canonicalURL } = Astro.request;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <BaseLayout>

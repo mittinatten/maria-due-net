@@ -1,18 +1,19 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Album from "../../components/Album.svelte";
-import { getAllAlbums, getAlbumBySlug } from "../../utils/data";
+import { getAllAlbums, getAlbumBySlug, pathToSlug } from "../../utils/data";
 import type { BreadCrumb } from "../../types";
 
-const { slug } = Astro.request.params;
+const slug = Astro.params.slug as string;
 
 export async function getStaticPaths() {
   const albums = await getAllAlbums(Astro.site.origin);
-  return albums.map(album => ({ params: { slug: album.path.split('/').pop() } }));
-};
-
-const album = await getAlbumBySlug(slug, Astro.request.canonicalURL.origin);
-const breadCrumb: BreadCrumb = [{ path: "/", title: "Albums"}, album ];
+  return albums.map((album) => ({
+    params: { slug: pathToSlug(album.path) },
+  }));
+}
+const album = await getAlbumBySlug(slug, Astro.site.origin);
+const breadCrumb: BreadCrumb = [{ path: "/", title: "Albums" }, album];
 ---
 
 <BaseLayout
@@ -22,7 +23,8 @@ const breadCrumb: BreadCrumb = [{ path: "/", title: "Albums"}, album ];
   property="album"
   typeOf="MusicAlbum"
   property="album"
-  resource={album.resourceURI}>
-  <div property="mainEntity" />
+  resource={album.resourceURI}
+>
+  <div property="mainEntity"></div>
   <Album {album} />
 </BaseLayout>
