@@ -101,7 +101,7 @@
 
   .menu li a {
     display: inline-block;
-    padding: 6px 8px;
+    padding: 8px;
   }
 
   .breadcrumbs {

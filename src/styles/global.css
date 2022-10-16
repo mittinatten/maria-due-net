@@ -65,7 +65,7 @@ header {
 
 main {
   max-width: 860px;
-  padding: 0 16px;
+  padding: 0 clamp(0px, 4vw - 16px, 16px);
 }
 
 a {

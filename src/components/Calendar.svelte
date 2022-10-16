@@ -100,7 +100,7 @@
   .city {
     font-size: calc((14 / 16) * 1rem);
     text-transform: uppercase;
-    opacity: 0.6;
+    opacity: 0.7;
     margin-top: 0.2rem;
   }
 
@@ -111,23 +111,27 @@
   ul {
     position: relative;
   }
+  footer ul {
+    display: flex;
+    flex-wrap: nowrap;
+  }
   footer li {
-    display: inline-block;
     font-size: calc((14 / 16) * 1rem);
     vertical-align: middle;
     line-height: 1;
+    white-space: nowrap;
   }
 
-  footer li:not(:last-child) {
-    border-right: 1px solid var(--color-text);
+  footer li:not(:last-child)::after {
+    content: "\FF5C";
+    width: 2px;
   }
 
   footer li:first-child {
-    margin-left: -8px;
+    margin-left: -6px;
   }
 
   footer li a {
-    display: block;
-    padding: 4px 8px;
+    padding: 10px 6px;
   }
 </style>

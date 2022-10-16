@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Album } from "../types";
+  import PlayButton from "./PlayButton.svelte";
 
   export let album: Album;
 </script>
@@ -8,15 +9,7 @@
   <h2>
     <span property="name">{album.title}</span>
   </h2>
-  <a
-    href={album.spotify}
-    aria-label="Play album on Spotify"
-    property="url"
-    class="play"
-    title="Play album on Spotify"
-  >
-    <i class="fa fa-play-circle" />
-  </a>
+  <PlayButton href={album.spotify} />
 </header>
 
 <div class="cover-song-list">

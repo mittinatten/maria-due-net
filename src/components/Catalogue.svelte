@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Album, AppearsOn } from "../types";
+  import PlayButton from "./PlayButton.svelte";
 
   export let albums: Album[];
   export let appearsOn: AppearsOn[];
@@ -24,9 +25,7 @@
 <ul class="collaborations">
   {#each appearsOn as item}
     <li property="track" typeof="MusicRecording">
-      <a href={item.spotify} property="url" aria-label="Play song on spotify"
-        ><i class="fa fa-play-circle" /></a
-      >
+      <PlayButton href={item.spotify} />
       <span property="byArtist" resource={item.by.sameAs} typeof="Artist">
         {#if item.by.homePage}
           <a href={item.by.homePage} property="url">

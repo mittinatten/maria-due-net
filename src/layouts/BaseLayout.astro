@@ -13,35 +13,7 @@ const {
   resource,
 } = Astro.props;
 const { url, canonicalURL } = Astro.request;
----
-
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta
-      name="google-site-verification"
-      content="zo-B2TdZe7lSw-ZoS0usXLKmwI380HjWKWlsSzFKVa8"
-    />
-    <title>{title}</title>
-    <meta name="description" content="Artist site for Maria Due" />
-    <link rel="canonical" href={canonicalURL} />
-    <link rel="shortcut icon" href="/assets/icon-48x48.png" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="og:image" href={ogImage} />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css"
-    />
-    <script>
-      if (navigator.serviceWorker) {
-        // clean up earlier version of site
-        navigator.serviceWorker
-          .getRegistrations()
-          .then((rs) => rs.forEach((r) => r.unregister()));
-      }
-    </script>
-    <style is:inline>
+const fontsCSS = `
       @font-face {
         font-family: "Roboto Condensed";
         font-style: normal;
@@ -77,13 +49,33 @@ const { url, canonicalURL } = Astro.request;
         font-weight: 900;
         font-display: block;
         src: url(/assets/fa-solid-900.woff2) format("woff2");
-      }
+      }`;
+---
 
-      .fa-solid,
-      .fas {
-        font-family: "Font Awesome 6 Free";
-        font-weight: 900;
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="google-site-verification"
+      content="zo-B2TdZe7lSw-ZoS0usXLKmwI380HjWKWlsSzFKVa8"
+    />
+    <title>{title}</title>
+    <meta name="description" content="Artist site for Maria Due" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="shortcut icon" href="/assets/icon-48x48.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="og:image" href={ogImage} />
+    <script>
+      if (navigator.serviceWorker) {
+        // clean up earlier version of site
+        navigator.serviceWorker
+          .getRegistrations()
+          .then((rs) => rs.forEach((r) => r.unregister()));
       }
+    </script>
+    <style set:html={fontsCSS}>
+
     </style>
   </head>
 
