@@ -26,11 +26,11 @@ function titleToSlug(title: string) {
 }
 
 function albumPath(album: { title: string }) {
-  return "/albums/" + titleToSlug(album.title);
+  return "/albums/" + titleToSlug(album.title) + "/";
 }
 
 function songPath(song: { title: string }) {
-  return "/songs/" + titleToSlug(song.title);
+  return "/songs/" + titleToSlug(song.title) + "/";
 }
 
 function videoId(url: string): string | undefined {

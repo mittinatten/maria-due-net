@@ -6,9 +6,9 @@
 
   const menuItems = [
     { link: "/", label: "Catalogue" },
-    { link: "/calendar", label: "Calendar" },
-    { link: "/videos", label: "Videos" },
-    { link: "/about", label: "About" },
+    { link: "/calendar/", label: "Calendar" },
+    { link: "/videos/", label: "Videos" },
+    { link: "/about/", label: "About" },
   ];
 </script>
 

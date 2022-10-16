@@ -70,6 +70,7 @@
     max-width: 100%;
     max-height: 100%;
     margin-bottom: 12px;
+    background-color: #e9ded2;
   }
   .collaborations li {
     list-style: none;
