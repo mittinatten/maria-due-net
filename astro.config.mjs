@@ -1,7 +1,10 @@
 import svelte from "@astrojs/svelte";
+import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
 
-export default {
+// https://astro.build/config
+export default defineConfig({
   site: "https://mariadue.net",
-  integrations: [svelte()],
+  integrations: [svelte(), sitemap()],
   trailingSlash: "always",
-};
+});
