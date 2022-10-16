@@ -14,7 +14,6 @@ const {
   typeOf,
   resource,
 } = Astro.props;
-const { url } = Astro.request;
 
 ---
 
@@ -60,7 +59,7 @@ const { url } = Astro.request;
       property="sameAs"
       resource="https://no.wikipedia.org/wiki/Maria_Due"
     />
-    <Header {breadCrumb} {url} />
+    <Header {breadCrumb} url={canonicalURL} />
     <main {property} typeof={typeOf} {resource}>
       <slot />
     </main>
