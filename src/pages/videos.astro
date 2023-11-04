@@ -1,10 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Videos from "../components/Videos.svelte";
+import VideosComponent from "../components/Videos.astro";
 import { getAllVideos } from "../utils/data";
 const videos = await getAllVideos();
-const {origin} = new URL(Astro.url.pathname, Astro.site);
+const { origin } = new URL(Astro.url.pathname, Astro.site);
 ---
 <BaseLayout title={"Maria Due - Music Videos"}>
-  <Videos {videos} {origin} />
+  <VideosComponent {videos} {origin} />
 </BaseLayout>

@@ -1,18 +1,23 @@
-<script lang="ts">
-  import { Video } from "../types";
+---
 
-  export let video: Video;
-  export let showLink = true;
-  export let origin: string;
+import { Video } from "../types";
 
-  const id =
-    origin + "/#video--" + video.title.replaceAll(" ", "-").toLowerCase();
+interface Props {
+  video: Video;
+  showLink: boolean;
+  origin: string;
+}
 
-  const embedUrl =
-    "https://www.youtube.com/embed/" +
-    video.id +
-    "?autoplay=0&modestbranding=1";
-</script>
+const { video, showLink, origin } = Astro.props;
+
+const id =
+  origin + "/#video--" + video.title.replaceAll(" ", "-").toLowerCase();
+
+const embedUrl =
+  "https://www.youtube.com/embed/" +
+  video.id +
+  "?autoplay=0&modestbranding=1";
+---
 
 <div class="wrapper" resource={id} typeof="VideoObject">
   <meta property="musicBy" typeof="MusicGroup" resource={origin} />
