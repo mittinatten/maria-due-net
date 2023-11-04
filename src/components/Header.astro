@@ -1,8 +1,11 @@
-<script lang="ts">
+---
   import { BreadCrumb } from "../types";
 
-  export let url: URL;
-  export let breadCrumb: BreadCrumb;
+  interface Props {
+    url: URL;
+    breadCrumb: BreadCrumb;
+  }
+  const { url, breadCrumb } = Astro.props;
 
   const menuItems = [
     { link: "/", label: "Catalogue" },
@@ -10,7 +13,7 @@
     { link: "/videos/", label: "Videos" },
     { link: "/about/", label: "About" },
   ];
-</script>
+---
 
 <header>
   <nav>
@@ -21,28 +24,28 @@
         </h1>
       </div>
       <ul class="menu">
-        {#each menuItems as item}
+        {menuItems.map(item =>
           <li>
-            <a href={item.link} class:active={url.pathname === item.link}
+            <a href={item.link} class={url.pathname === item.link ? "active" : ""}
               >{item.label}</a
             >
           </li>
-        {/each}
+        )}
       </ul>
     </div>
 
-    {#if breadCrumb?.length}
+    {breadCrumb?.length ?
       <ol class="breadcrumbs" typeof="BreadcrumbList">
-        {#each breadCrumb.filter((item) => !!item.path) as item, position}
+        {breadCrumb.filter((item) => !!item.path).map((item, position) =>
           <li property="itemListElement" typeof="ListItem">
             <meta property="position" content={position.toString()} />
             <a class="item" href={item.path} property="url">
               <span property="name">{item.title}</span>
             </a>
           </li>
-        {/each}
+        )}
       </ol>
-    {/if}
+    : null}
   </nav>
 </header>
 
