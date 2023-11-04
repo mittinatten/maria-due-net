@@ -7,6 +7,6 @@ const {origin } = new URL(Astro.url.pathname, Astro.site);
 const albums = await getAllAlbums(origin);
 const appearsOn = await getAllAppearsOn();
 ---
-<BaseLayout title="Maria Due - Catalogue">
+<BaseLayout title="Maria Due">
   <Catalogue {albums} {appearsOn} />
 </BaseLayout>
