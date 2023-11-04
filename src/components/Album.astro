@@ -1,9 +1,13 @@
-<script lang="ts">
-  import { Album } from "../types";
-  import PlayButton from "./PlayButton.svelte";
+---
+import { Album } from "../types";
+import PlayButton from "./PlayButton.svelte";
 
-  export let album: Album;
-</script>
+interface Props {
+  album: Album;
+}
+
+const { album } = Astro.props;
+---
 
 <header>
   <h2>
@@ -20,26 +24,26 @@
     </picture>
     <p property="producer" typeof="Person" resource={album.producer.sameAs}>
       Produced by
-      {#if album.producer.homePage}
+      {album.producer.homePage ?
         <a href={album.producer.homePage} property="url">
           <span property="name">{album.producer.name}</span>
         </a>
-      {:else}
+        :
         <span property="name">{album.producer.name}</span>
-      {/if}
+      }
       (<span property="datePublished">{album.year}</span>).
     </p>
   </div>
   <div class="songs">
     <h3>Songs</h3>
     <ol>
-      {#each album.songs as song}
+      {album.songs.map(song =>
         <li property="track" typeof="MusicRecording">
-          <a href={song.path} property="mainEntityOfPage"
-            ><span property="name">{song.title}</span>
+          <a href={song.path} property="mainEntityOfPage">
+            <span property="name">{song.title}</span>
           </a>
         </li>
-      {/each}
+      )}
     </ol>
   </div>
 </div>
