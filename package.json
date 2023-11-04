@@ -9,11 +9,11 @@
     "preview": "astro preview"
   },
   "devDependencies": {
-    "astro": "^2.10.15"
+    "astro": "^3.4.3"
   },
   "dependencies": {
     "@astrojs/sitemap": "^2.0.2",
-    "@astrojs/svelte": "^2.2.0",
+    "@astrojs/svelte": "^4.0.3",
     "@portabletext/svelte": "^0.2.0",
     "autoprefixer": "^10.4.4"
   }
