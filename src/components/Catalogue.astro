@@ -1,14 +1,17 @@
-<script lang="ts">
+---
   import { Album, AppearsOn } from "../types";
   import PlayButton from "./PlayButton.svelte";
 
-  export let albums: Album[];
-  export let appearsOn: AppearsOn[];
-</script>
+  interface Props {
+    albums: Album[];
+    appearsOn: AppearsOn[];
+  }
+  const {albums, appearsOn } = Astro.props;
+---
 
 <h2>Albums</h2>
 <ul class="albums">
-  {#each albums as album (album.title)}
+  {albums.map(album =>
     <li property="album" typeof="MusicAlbum" resource={album.resourceURI}>
       <a href={album.path} property="mainEntityOfPage">
         <picture>
@@ -19,30 +22,29 @@
         (<span property="datePublished">{album.year}</span>)
       </a>
     </li>
-  {/each}
+ )}
 </ul>
 <h2>Collaborations</h2>
 <ul class="collaborations">
-  {#each appearsOn as item}
+  {appearsOn.map(item =>
     <li property="track" typeof="MusicRecording">
       <PlayButton href={item.spotify} />
       <span property="byArtist" resource={item.by.sameAs} typeof="Artist">
-        {#if item.by.homePage}
-          <a href={item.by.homePage} property="url">
-            <span property="name">
+        {item.by.homePage
+          ? <a href={item.by.homePage} property="url">
+              <span property="name">
+                {item.by.name}
+              </span>
+            </a>
+          : <span property="name">
               {item.by.name}
             </span>
-          </a>
-        {:else}
-          <span property="name">
-            {item.by.name}
-          </span>
-        {/if}
+        }
       </span>:
       <span class="title" property="name">{item.title}</span>
       (<span property="datePublished">{item.year}</span>)
     </li>
-  {/each}
+  )}
 </ul>
 
 <style>
