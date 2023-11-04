@@ -1,14 +1,19 @@
-<script lang="ts">
-  import { Song } from "../types";
-  import SongCreator from "./SongCreator.svelte";
-  import VideoComponent from "./VideoComponent.svelte";
+---
+import { Song } from "../types";
+import SongCreator from "./SongCreator.svelte";
+import VideoComponent from "./VideoComponent.svelte";
 
-  export let song: Song;
-  export let origin: string;
-</script>
+interface Props {
+  song: Song;
+  origin: string;
+}
 
+const { song, origin } = Astro.props;
+
+
+---
 <h2 property="name">{song.title}</h2>
-{#if song.lyrics}
+{song.lyrics ?
   <div
     property="lyrics"
     typeof="CreativeWork"
@@ -16,9 +21,9 @@
   >
     <div class="lyrics" property="text">{song.lyrics}</div>
   </div>
-{:else}
+ :
   <div class="lyrics">{"[Lyrics not available yet]"}</div>
-{/if}
+}
 
 <footer>
   <p property="inAlbum" typeof="MusicAlbum" resource={song.album.resourceURI}>
@@ -38,7 +43,7 @@
     >.
   </p>
   <p><SongCreator {song} {origin} /></p>
-  {#if song.video}
+  {song.video &&
     <div class="video" property="video" typeof="VideoObject">
       <VideoComponent
         video={{ url: song.video, id: song.videoId, title: song.title }}
@@ -46,7 +51,7 @@
         {origin}
       />
     </div>
-  {/if}
+  }
 </footer>
 
 <style>

@@ -9,7 +9,10 @@
 <style>
   a {
     text-decoration: none;
+    min-width: 1.2em;
+    display: inline-block;
   }
+
   i {
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
