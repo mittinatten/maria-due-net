@@ -191,10 +191,11 @@ export async function getAllVideos() {
       allVideos {
         title
         url
+        sortOrder
       }
     }`);
 
-  const allVideos = response.allVideos.map((video) => {
+  const allVideos = response.allVideos.sort((a, b) => a.sortOrder < b.sortOrder ? -1 : 1).map((video) => {
     const id = video.url.match(/v=(\w+)$/)[1];
     return {
       ...video,
@@ -223,10 +224,10 @@ export async function getAllConcerts() {
   const allConcerts = response.allConcerts
     .map(
       (concert) =>
-        ({
-          ...concert,
-          date: new Date(concert.date),
-        } as Concert)
+      ({
+        ...concert,
+        date: new Date(concert.date),
+      } as Concert)
     )
     .sort((a, b) => (a.date > b.date ? -1 : 1));
 

@@ -74,6 +74,7 @@ export interface AppearsOn {
 export interface RawVideo {
   title: string;
   url: string;
+  sortOrder: number
 }
 
 export interface Video extends RawVideo {
