@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ViewTransitions } from "astro:transitions";
 import "../styles/global.css";
 
 import Header from "../components/Header.astro";
@@ -15,8 +15,8 @@ const {
   typeOf,
   resource,
 } = Astro.props;
-
 ---
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -31,17 +31,27 @@ const {
     <link rel="shortcut icon" href="/assets/icon-48x48.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="og:image" href={ogImage} />
-    <link rel="preload" as="font" type="font/woff2" href="/assets/roboto-condensed.woff2" crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href="/assets/roboto-mono.woff2" crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href="/assets/roboto-slab.woff2" crossorigin />
-    <script>
-      if (navigator.serviceWorker) {
-        // clean up earlier version of site
-        navigator.serviceWorker
-          .getRegistrations()
-          .then((rs) => rs.forEach((r) => r.unregister()));
-      }
-    </script>
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/roboto-condensed.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/roboto-mono.woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/assets/roboto-slab.woff2"
+      crossorigin
+    />
     <ViewTransitions />
   </head>
 

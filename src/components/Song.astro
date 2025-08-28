@@ -1,6 +1,6 @@
 ---
-import { Song } from "../types";
-import SongCreator from "./SongCreator.svelte";
+import type { Song } from "../types";
+import SongCreator from "./SongCreator.astro";
 import VideoComponent from "./VideoComponent.astro";
 
 interface Props {
@@ -9,19 +9,23 @@ interface Props {
 }
 
 const { song, origin } = Astro.props;
-
 ---
+
 <h2 property="name">{song.title}</h2>
-{song.lyrics ?
-  <div
-    property="lyrics"
-    typeof="CreativeWork"
-    resource={song.resourceURI + "#lyrics"}
-  >
-    <div class="lyrics" property="text">{song.lyrics}</div>
-  </div>
- :
-  <div class="lyrics">{"[Lyrics not available yet]"}</div>
+{
+  song.lyrics ? (
+    <div
+      property="lyrics"
+      typeof="CreativeWork"
+      resource={song.resourceURI + "#lyrics"}
+    >
+      <div class="lyrics" property="text">
+        {song.lyrics}
+      </div>
+    </div>
+  ) : (
+    <div class="lyrics">{"[Lyrics not available yet]"}</div>
+  )
 }
 
 <footer>
@@ -42,14 +46,21 @@ const { song, origin } = Astro.props;
     >.
   </p>
   <p><SongCreator {song} {origin} /></p>
-  {song.video &&
-    <div class="video" property="video" typeof="VideoObject">
-      <VideoComponent
-        video={{ url: song.video, id: song.videoId, title: song.title }}
-        showLink={false}
-        {origin}
-      />
-    </div>
+  {
+    song.video && (
+      <div class="video" property="video" typeof="VideoObject">
+        <VideoComponent
+          video={{
+            url: song.video,
+            id: song.videoId,
+            title: song.title,
+            sortOrder: 0,
+          }}
+          showLink={false}
+          {origin}
+        />
+      </div>
+    )
   }
 </footer>
 

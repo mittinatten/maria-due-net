@@ -1,6 +1,6 @@
 ---
-import { Album } from "../types";
-import PlayButton from "./PlayButton.svelte";
+import type { Album } from "../types";
+import PlayButton from "./PlayButton.astro";
 
 interface Props {
   album: Album;
@@ -24,12 +24,14 @@ const { album } = Astro.props;
     </picture>
     <p property="producer" typeof="Person" resource={album.producer.sameAs}>
       Produced by
-      {album.producer.homePage ?
-        <a href={album.producer.homePage} property="url">
+      {
+        album.producer.homePage ? (
+          <a href={album.producer.homePage} property="url">
+            <span property="name">{album.producer.name}</span>
+          </a>
+        ) : (
           <span property="name">{album.producer.name}</span>
-        </a>
-        :
-        <span property="name">{album.producer.name}</span>
+        )
       }
       (<span property="datePublished">{album.year}</span>).
     </p>
@@ -37,13 +39,15 @@ const { album } = Astro.props;
   <div class="songs">
     <h3>Songs</h3>
     <ol>
-      {album.songs.map(song =>
-        <li property="track" typeof="MusicRecording">
-          <a href={song.path} property="mainEntityOfPage">
-            <span property="name">{song.title}</span>
-          </a>
-        </li>
-      )}
+      {
+        album.songs.map((song) => (
+          <li property="track" typeof="MusicRecording">
+            <a href={song.path} property="mainEntityOfPage">
+              <span property="name">{song.title}</span>
+            </a>
+          </li>
+        ))
+      }
     </ol>
   </div>
 </div>

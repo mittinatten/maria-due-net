@@ -1,0 +1,56 @@
+---
+import type { Song } from "../types";
+
+interface Props {
+  song: Song;
+  origin: string;
+}
+const { song, origin } = Astro.props;
+---
+
+{
+  song.lyricsBy && song.musicBy ? (
+    JSON.stringify(song.lyricsBy) === JSON.stringify(song.musicBy) ? (
+      <>
+        Words and music by
+        {song.lyricsBy.map((person, i) => (
+          <>
+            <span property="composer lyricist" typeof="Person">
+              <span property="name">{person.name}</span>
+            </span>
+            {i < song.lyricsBy.length - 1 && "/"}
+          </>
+        ))}
+      </>
+    ) : (
+      <>
+        Music by
+        {song.musicBy.map((person, i) => (
+          <>
+            <span property="composer" typeof="Person">
+              <span property="name">{person.name}</span>
+            </span>
+            {i < song.musicBy.length - 1 && " / "}
+          </>
+        ))}
+        <br />
+        Words by
+        {song.lyricsBy.map((person, i) => (
+          <>
+            <span property="lyricist" typeof="Person">
+              <span property="name">{person.name}</span>
+            </span>
+            {i < song.lyricsBy.length - 1 && " / "}
+          </>
+        ))}
+      </>
+    )
+  ) : (
+    <>
+      Words and music by
+      <span property="composer lyricist" typeof="Person" resource={origin}>
+        Maria Due.
+      </span>
+    </>
+  )
+}

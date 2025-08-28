@@ -1,6 +1,5 @@
 ---
-
-import { Video } from "../types";
+import type { Video } from "../types";
 
 interface Props {
   video: Video;
@@ -14,9 +13,7 @@ const id =
   origin + "/#video--" + video.title.replaceAll(" ", "-").toLowerCase();
 
 const embedUrl =
-  "https://www.youtube.com/embed/" +
-  video.id +
-  "?autoplay=0&modestbranding=1";
+  "https://www.youtube.com/embed/" + video.id + "?autoplay=0&modestbranding=1";
 ---
 
 <div class="wrapper" resource={id} typeof="VideoObject">
@@ -33,13 +30,10 @@ const embedUrl =
     <iframe
       allow-fullscreen="allowfullscreen"
       id="ytplayer"
-      type="text/html"
       width="640"
       height="360"
       src={embedUrl}
-      title={video.title}
-      frameBorder="0"
-    />
+      title={video.title}></iframe>
   </div>
   <p style={showLink ? undefined : "display: none"}>
     <a href={video.url}><span>{video.title}</span></a>

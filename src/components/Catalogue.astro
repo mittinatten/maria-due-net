@@ -1,50 +1,58 @@
 ---
-  import { Album, AppearsOn } from "../types";
-  import PlayButton from "./PlayButton.svelte";
+import type { Album, AppearsOn } from "../types";
+import PlayButton from "./PlayButton.astro";
 
-  interface Props {
-    albums: Album[];
-    appearsOn: AppearsOn[];
-  }
-  const {albums, appearsOn } = Astro.props;
+interface Props {
+  albums: Album[];
+  appearsOn: AppearsOn[];
+}
+const { albums, appearsOn } = Astro.props;
 ---
 
 <h2>Albums</h2>
 <ul class="albums">
-  {albums.map(album =>
-    <li property="album" typeof="MusicAlbum" resource={album.resourceURI}>
-      <a href={album.path} property="mainEntityOfPage">
-        <picture>
-          <source type="image/webp" srcset={album.cover.asset.webp} />
-          <img property="image" src={album.cover.asset.url} alt="Album cover" />
-        </picture>
-        <span property="name">{album.title}</span>
-        (<span property="datePublished">{album.year}</span>)
-      </a>
-    </li>
- )}
+  {
+    albums.map((album) => (
+      <li property="album" typeof="MusicAlbum" resource={album.resourceURI}>
+        <a href={album.path} property="mainEntityOfPage">
+          <picture>
+            <source type="image/webp" srcset={album.cover.asset.webp} />
+            <img
+              property="image"
+              src={album.cover.asset.url}
+              alt="Album cover"
+            />
+          </picture>
+          <span property="name">{album.title}</span>(
+          <span property="datePublished">{album.year}</span>)
+        </a>
+      </li>
+    ))
+  }
 </ul>
 <h2>Collaborations</h2>
 <ul class="collaborations">
-  {appearsOn.map(item =>
-    <li property="track" typeof="MusicRecording">
-      <PlayButton href={item.spotify} />
-      <span property="byArtist" resource={item.by.sameAs} typeof="Artist">
-        {item.by.homePage
-          ? <a href={item.by.homePage} property="url">
-              <span property="name">
-                {item.by.name}
-              </span>
+  {
+    appearsOn.map((item) => (
+      <li property="track" typeof="MusicRecording">
+        <PlayButton href={item.spotify} />
+        <span property="byArtist" resource={item.by.sameAs} typeof="Artist">
+          {item.by.homePage ? (
+            <a href={item.by.homePage} property="url">
+              <span property="name">{item.by.name}</span>
             </a>
-          : <span property="name">
-              {item.by.name}
-            </span>
-        }
-      </span>:
-      <span class="title" property="name">{item.title}</span>
-      (<span property="datePublished">{item.year}</span>)
-    </li>
-  )}
+          ) : (
+            <span property="name">{item.by.name}</span>
+          )}
+        </span>
+        :
+        <span class="title" property="name">
+          {item.title}
+        </span>
+        (<span property="datePublished">{item.year}</span>)
+      </li>
+    ))
+  }
 </ul>
 
 <style>

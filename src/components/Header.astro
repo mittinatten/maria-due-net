@@ -1,18 +1,18 @@
 ---
-  import { BreadCrumb } from "../types";
+import type { BreadCrumb } from "../types";
 
-  interface Props {
-    url: URL;
-    breadCrumb: BreadCrumb;
-  }
-  const { url, breadCrumb } = Astro.props;
+interface Props {
+  url: URL;
+  breadCrumb: BreadCrumb;
+}
+const { url, breadCrumb } = Astro.props;
 
-  const menuItems = [
-    { link: "/", label: "Catalogue" },
-    // { link: "/calendar/", label: "Calendar" },
-    { link: "/videos/", label: "Videos" },
-    { link: "/about/", label: "About" },
-  ];
+const menuItems = [
+  { link: "/", label: "Catalogue" },
+  { link: "/calendar/", label: "Calendar" },
+  { link: "/videos/", label: "Videos" },
+  { link: "/about/", label: "About" },
+];
 ---
 
 <header>
@@ -24,28 +24,37 @@
         </h1>
       </div>
       <ul class="menu">
-        {menuItems.map(item =>
-          <li>
-            <a href={item.link} class={url.pathname === item.link ? "active" : ""}
-              >{item.label}</a
-            >
-          </li>
-        )}
+        {
+          menuItems.map((item) => (
+            <li>
+              <a
+                href={item.link}
+                class={url.pathname === item.link ? "active" : ""}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </div>
 
-    {breadCrumb?.length ?
-      <ol class="breadcrumbs" typeof="BreadcrumbList">
-        {breadCrumb.filter((item) => !!item.path).map((item, position) =>
-          <li property="itemListElement" typeof="ListItem">
-            <meta property="position" content={position.toString()} />
-            <a class="item" href={item.path} property="url">
-              <span property="name">{item.title}</span>
-            </a>
-          </li>
-        )}
-      </ol>
-    : null}
+    {
+      breadCrumb?.length ? (
+        <ol class="breadcrumbs" typeof="BreadcrumbList">
+          {breadCrumb
+            .filter((item) => !!item.path)
+            .map((item, position) => (
+              <li property="itemListElement" typeof="ListItem">
+                <meta property="position" content={position.toString()} />
+                <a class="item" href={item.path} property="url">
+                  <span property="name">{item.title}</span>
+                </a>
+              </li>
+            ))}
+        </ol>
+      ) : null
+    }
   </nav>
 </header>
 

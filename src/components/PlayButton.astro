@@ -1,6 +1,9 @@
-<script lang="ts">
-  export let href: string;
-</script>
+---
+interface Props {
+  href: string;
+}
+const { href } = Astro.props;
+---
 
 <a {href} property="url" aria-label="Play song on spotify">
   <i aria-hidden="true">&#xf144;</i>

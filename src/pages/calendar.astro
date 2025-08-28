@@ -1,12 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Calendar from "../components/Calendar.svelte";
+import CalendarComponent from "../components/Calendar.astro";
 import { getAllConcerts } from "../utils/data";
 
-const concerts = await getAllConcerts()
+const concerts = await getAllConcerts();
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <BaseLayout>
-  <Calendar {concerts} origin={canonicalURL.href} baseURL={canonicalURL.origin} />
+  <CalendarComponent
+    {concerts}
+    origin={canonicalURL.href}
+    baseURL={canonicalURL.origin}
+  />
 </BaseLayout>
