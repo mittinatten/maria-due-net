@@ -7,7 +7,7 @@ const concerts = await getAllConcerts();
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<BaseLayout>
+<BaseLayout title="Maria Due - Calendar">
   <CalendarComponent
     {concerts}
     origin={canonicalURL.href}
