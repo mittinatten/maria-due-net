@@ -11,13 +11,13 @@ const { videos, origin } = Astro.props;
 
 <h2>Videos</h2>
 <div class="wrapper">
-  {videos.map((video) => <VideoComponent {video} {origin} showLink={true} />)}
+  {videos.map((video) => <VideoComponent {video} {origin} />)}
 </div>
 
 <style>
   .wrapper {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 32px;
+    gap: var(--large-gap);
   }
 </style>

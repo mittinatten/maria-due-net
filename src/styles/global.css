@@ -1,3 +1,43 @@
+@font-face {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 400;
+  font-display: fallback;
+  src: local("Roboto Condensed"), url(/assets/roboto-condensed.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto Mono";
+  font-style: italic;
+  font-weight: 300;
+  font-display: fallback;
+  src: local("Roboto Mono"), url(/assets/roboto-mono.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto Slab";
+  font-style: normal;
+  font-weight: 400;
+  font-display: fallback;
+  src: local("Roboto Slab"), url(/assets/roboto-slab.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto Slab";
+  font-style: normal;
+  font-weight: 700;
+  font-display: fallback;
+  src: local("Roboto Slab"), url(/assets/roboto-slab.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url(/assets/fa-solid-900.woff2) format("woff2");
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -26,6 +66,10 @@
   }
 }
 
+@view-transition {
+  navigation: auto;
+}
+
 h1,
 h2,
 h3,
@@ -34,6 +78,11 @@ h5 {
   font-family: "Roboto Condensed", sans-serif;
   margin-top: 0.8em;
   margin-bottom: 0.5em;
+}
+
+h1 {
+  margin-block: 0.67em;
+  font-size: 2em;
 }
 
 h2 {
@@ -81,47 +130,9 @@ li {
   list-style: none;
 }
 
- @font-face {
-   font-family: "Roboto Condensed";
-   font-style: normal;
-   font-weight: 400;
-   font-display: fallback;
-   src: url(/assets/roboto-condensed.woff2) format("woff2");
- }
 
- @font-face {
-   font-family: "Roboto Mono";
-   font-style: italic;
-   font-weight: 300;
-   font-display: fallback;
-   src: url(/assets/roboto-mono.woff2) format("woff2");
- }
 
- @font-face {
-   font-family: "Roboto Slab";
-   font-style: normal;
-   font-weight: 400;
-   font-display: fallback;
-   src: url(/assets/roboto-slab.woff2) format("woff2");
- }
-
- @font-face {
-   font-family: "Roboto Slab";
-   font-style: normal;
-   font-weight: 700;
-   font-display: fallback;
-   src: url(/assets/roboto-slab.woff2) format("woff2");
- }
-
- :host,
- :root {
-   --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
- }
-
- @font-face {
-   font-family: "Font Awesome 6 Free";
-   font-style: normal;
-   font-weight: 900;
-   font-display: block;
-   src: url(/assets/fa-solid-900.woff2) format("woff2");
- }
+:host,
+:root {
+  --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
+}

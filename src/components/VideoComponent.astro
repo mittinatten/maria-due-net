@@ -1,43 +1,43 @@
 ---
+import { Picture } from "astro:assets";
 import type { Video } from "../types";
 
 interface Props {
   video: Video;
-  showLink: boolean;
   origin: string;
 }
 
-const { video, showLink, origin } = Astro.props;
+const { video, origin } = Astro.props;
 
 const id =
   origin + "/#video--" + video.title.replaceAll(" ", "-").toLowerCase();
-
-const embedUrl =
-  "https://www.youtube.com/embed/" + video.id + "?autoplay=0&modestbranding=1";
 ---
 
 <div class="wrapper" resource={id} typeof="VideoObject">
   <meta property="musicBy" typeof="MusicGroup" resource={origin} />
   <meta property="description" content="Music video by Maria Due" />
   <meta property="contentUrl url" content={video.url} />
-  <meta property="embedUrl" content={embedUrl} />
   <meta property="name" content={video.title} />
   <meta
     property="thumbnailUrl"
     content={`https://img.youtube.com/vi/${video.id}/0.jpg`}
   />
-  <div class="iframe-wrapper">
-    <iframe
-      allow-fullscreen="allowfullscreen"
-      id="ytplayer"
-      width="640"
-      height="360"
-      src={embedUrl}
-      title={video.title}></iframe>
-  </div>
-  <p style={showLink ? undefined : "display: none"}>
-    <a href={video.url}><span>{video.title}</span></a>
-  </p>
+
+  <a href={video.url} rel="noreferrer" target="_blank">
+    <Picture
+      src={`https://img.youtube.com/vi/${video.id}/0.jpg`}
+      alt=""
+      height="200"
+      width="400"
+      loading={video.sortOrder < 3 ? "eager" : "lazy"}
+      fetchpriority={video.sortOrder < 3 ? "high" : "auto"}
+    />
+    <i class="play-button" aria-hidden="true">&#xf144;</i>
+
+    <p aria-label={video.title + " (on Youtube)"}>
+      {video.title}<i>&#xf08e;</i>
+    </p>
+  </a>
 </div>
 
 <style>
@@ -48,13 +48,44 @@ const embedUrl =
     padding-bottom: 68%;
   }
 
-  iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    cursor: pointer;
-    width: 100%;
-    height: 96%;
+  a {
+    display: block;
+    position: relative;
+  }
+  img {
+    object-fit: cover;
     background-color: black;
+    max-width: 100%;
+  }
+
+  i {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-style: normal;
+    text-decoration: none;
+  }
+
+  .play-button {
+    border: 2px solid white;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: calc(50% - 1.5rem);
+    left: calc(50% - 1.5rem);
+    font-size: 3rem;
+    color: black;
+  }
+  a:visited .play-button {
+    color: black;
+  }
+  a:active .play-button,
+  a:hover .play-button {
+    color: var(--color-primary);
+  }
+
+  p i {
+    display: inline-block;
+    width: 1.5rem;
+    text-align: center;
   }
 </style>

@@ -30,6 +30,7 @@ export interface RawAlbum {
     homePage: string;
   };
   cover: SanityImage;
+  coverAlt: string;
   year: number;
   spotify: string;
   producer: Person;

@@ -1,6 +1,7 @@
 ---
 import type { Album, AppearsOn } from "../types";
 import PlayButton from "./PlayButton.astro";
+import { Image, Picture } from "astro:assets";
 
 interface Props {
   albums: Album[];
@@ -12,19 +13,22 @@ const { albums, appearsOn } = Astro.props;
 <h2>Albums</h2>
 <ul class="albums">
   {
-    albums.map((album) => (
+    albums.map((album, i) => (
       <li property="album" typeof="MusicAlbum" resource={album.resourceURI}>
         <a href={album.path} property="mainEntityOfPage">
-          <picture>
-            <source type="image/webp" srcset={album.cover.asset.webp} />
-            <img
-              property="image"
-              src={album.cover.asset.url}
-              alt="Album cover"
-            />
-          </picture>
-          <span property="name">{album.title}</span>(
-          <span property="datePublished">{album.year}</span>)
+          <Picture
+            src={album.cover.asset.url}
+            formats={["avif", "webp"]}
+            alt={album.coverAlt}
+            width="600"
+            height="600"
+            loading={i < 2 ? "eager" : "lazy"}
+            fetchpriority={i < 2 ? "high" : "auto"}
+          />
+          <div class="title">
+            <span property="name">{album.title}</span>(
+            <span property="datePublished">{album.year}</span>)
+          </div>
         </a>
       </li>
     ))
@@ -77,17 +81,22 @@ const { albums, appearsOn } = Astro.props;
 
   .albums li a img {
     display: block;
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: fit-content;
+    aspect-ratio: 1;
     margin-bottom: 12px;
     background-color: #e9ded2;
   }
+
   .collaborations li {
     list-style: none;
     margin-bottom: 12px;
   }
+
   .collaborations :global(i) {
     width: 1.5em;
+    height: 1.5em;
+    display: inline-block;
     text-align: center;
   }
 

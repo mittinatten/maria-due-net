@@ -17,8 +17,15 @@ async function fetchSanity<T>(query: string) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query }),
   });
+  if (!response.ok) {
+    throw Error("Fetch failed with " + response.status)
+  }
   const json = await response.json();
+  if (json.errors) {
+    throw Error("Error fetching data: " + JSON.stringify(json.errors))
+  }
   return json.data as Promise<T>;
+
 }
 
 function titleToSlug(title: string) {
@@ -55,6 +62,7 @@ export async function getAllAlbums(origin: string): Promise<Album[]> {
         title
         spotify
         year
+        coverAlt
         cover {
           asset {
             url
@@ -80,6 +88,7 @@ export async function getAllAlbums(origin: string): Promise<Album[]> {
         }
       }
     }`);
+
 
   allAlbums = response.allAlbums
     .map((album) => ({

@@ -1,0 +1,92 @@
+---
+import { Picture } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import image1 from "../images/DSCF5729.JPG";
+import image2 from "../images/DSCF5730.JPG";
+import image3 from "../images/DSCF5752.JPG";
+import image4 from "../images/DSCF5587.JPG";
+import image5 from "../images/DSCF5626.JPG";
+import image6 from "../images/DSCF5639.JPG";
+import image7 from "../images/DSCF5751.JPG";
+
+const images = [image7, image5, image6, image2, image3, image1, image4].map(
+  (img) => ({
+    img,
+    src: "/images/" + img.src.split("/").pop(),
+    portrait: img.height > img.width,
+  }),
+);
+---
+
+<BaseLayout>
+  <section lang="nb">
+    <h1><strong>[Utkast]</strong> Presseskriv for EP Gravul (2025)</h1>
+    <hr />
+    <h2>Gråtekone i asfaltdjungelen</h2>
+    <p>Maria Due er veldig bra</p>
+    <hr />
+    <h2>Bilder</h2>
+    <p>Fotograf: Simon Mitternacht</p>
+    <div class="images">
+      {
+        images.map((image, i) => (
+          <a
+            href={image.src}
+            class:list={[image.portrait ? "portrait" : undefined]}
+          >
+            <Picture
+              src={image.img}
+              formats={["avif", "webp"]}
+              alt="Maria Due i skjærgårdslandskap"
+              width={image.portrait ? 400 : 600}
+            />
+            <i aria-hidden="true">&#xf019;</i>
+            <span>Bilde {i + 1} original</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  p {
+    margin-bottom: 1rem;
+  }
+
+  .images {
+    display: flex;
+    justify-content: center;
+    gap: var(--large-gap);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  a {
+    display: block;
+    flex-basis: min(500px, 100%);
+    position: relative;
+
+    text-decoration: none;
+    span {
+      text-decoration: underline;
+    }
+  }
+
+  .portrait {
+    flex-basis: max(300px, calc(50% - var(--large-gap)));
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: fit-content;
+  }
+
+  i {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-style: normal;
+  }
+</style>
