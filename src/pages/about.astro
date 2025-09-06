@@ -1,18 +1,30 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import image from "../images/maria-due-cabo-de-gata-2018.jpeg";
+import { Picture } from "astro:assets";
 ---
 
 <BaseLayout>
   <h2>Contact</h2>
-  <p>Contact Maria Due at <a href="mailto:mardue@gmail.com">mardue@gmail.com</a></p>
-  <img src="/assets/maria-due-cabo-de-gata-2018.jpeg" alt="Maria Due in Cabo de Gata 2018">
-</BaseLayout>
+  <p>
+    Contact Maria Due at <a href="mailto:mardue@gmail.com">mardue@gmail.com</a>
+  </p>
+  <Picture
+    src={image}
+    alt="Maria Due in Cabo de Gata 2018"
+    width="960"
+    fetchpriority="high"
+    loading="eager"
+    formats={["avif", "webp"]}
+  />
 
-<style>
-  p {
-    margin-bottom: 1rem;
-  }
-  img {
-    max-width: min(100%, 480px);
-  }
-</style>
+  <style>
+    p {
+      margin-bottom: 1rem;
+    }
+    img {
+      max-width: min(100%, 480px);
+      height: fit-content;
+    }
+  </style>
+</BaseLayout>
