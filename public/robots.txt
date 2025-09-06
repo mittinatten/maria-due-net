@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://mariadue.net/sitemap.xml
+Sitemap: https://mariadue.net/sitemap-index.xml
 Host: https://mariadue.net

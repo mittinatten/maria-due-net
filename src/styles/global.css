@@ -93,12 +93,19 @@ h3 {
   font-size: var(--h3-font-size);
 }
 
+html,
+body,
+main {
+  scrollbar-gutter: stable;
+}
+
 body {
   padding: var(--large-gap);
   width: 100%;
   min-height: 100vh;
   background: var(--color-background);
   color: var(--color-text);
+
 }
 
 main,
