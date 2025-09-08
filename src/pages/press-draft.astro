@@ -2,21 +2,25 @@
 import { Picture } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-import image1 from "../images/DSCF5729.JPG";
-import image2 from "../images/DSCF5730.JPG";
-import image3 from "../images/DSCF5752.JPG";
-import image4 from "../images/DSCF5587.JPG";
-import image5 from "../images/DSCF5626.JPG";
-import image6 from "../images/DSCF5639.JPG";
-import image7 from "../images/DSCF5751.JPG";
+const imageFileNames = [
+  "DSCF5729",
+  "DSCF5730",
+  "DSCF5752",
+  "DSCF5587",
+  "DSCF5626",
+  "DSCF5639",
+  "DSCF5751",
+];
 
-const images = [image7, image5, image6, image2, image3, image1, image4].map(
-  (img) => ({
-    img,
-    src: "/images/" + img.src.split("/").pop(),
-    portrait: img.height > img.width,
-  }),
-);
+const images: { img: any; src: string; portrait: boolean }[] = [];
+for (const filename of imageFileNames) {
+  const image = (await import(`../../public/images/${filename}.JPG`)).default;
+  images.push({
+    img: image,
+    src: "/images/" + filename + ".JPG",
+    portrait: image.height > image.width,
+  });
+}
 ---
 
 <BaseLayout title="Maria Due - Ny EP Gravul">
