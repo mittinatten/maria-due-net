@@ -89,7 +89,6 @@ export async function getAllAlbums(origin: string): Promise<Album[]> {
       }
     }`);
 
-
   allAlbums = response.allAlbums
     .map((album) => ({
       ...album,
@@ -97,7 +96,7 @@ export async function getAllAlbums(origin: string): Promise<Album[]> {
       songs: album.songs.map((song) => ({
         ...song,
         path: songPath(song),
-        resourceURI: origin + songPath,
+        resourceURI: origin + songPath(song),
       })),
       resourceURI: origin + albumPath(album),
       cover: {
