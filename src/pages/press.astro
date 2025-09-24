@@ -94,8 +94,10 @@ const [mainImage, secondaryImage] = images;
               alt="Maria Due i skjærgårdslandskap"
               width={image.portrait ? 400 : 600}
             />
-            <i aria-hidden="true">&#xf019;</i>
-            <span>Last ned full oppløsning</span>
+            <div class="download-image-link">
+              <i aria-hidden="true">&#xf019;</i>
+              <span>Last ned full oppløsning</span>
+            </div>
           </a>
         ))
       }
@@ -234,17 +236,25 @@ const [mainImage, secondaryImage] = images;
 
   a[type="image/jpeg"] {
     display: block;
-    flex-basis: min(400px, 100%);
+    flex-basis: min(330px, 100%);
     position: relative;
 
     text-decoration: none;
-    span {
-      text-decoration: underline;
+    .download-image-link {
+      font-size: 0.9rem;
+      text-align: right;
+      padding: 0.2rem 0;
+      span {
+        text-decoration: underline;
+      }
+      i {
+        margin-right: 0.2rem;
+      }
     }
   }
 
   a[type="image/jpeg"].portrait {
-    flex-basis: max(300px, calc(40% - var(--large-gap)));
+    flex-basis: max(220px, calc(45% - var(--large-gap)));
   }
 
   img {
