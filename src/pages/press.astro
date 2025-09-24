@@ -1,0 +1,287 @@
+---
+import { Picture } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const imageFileNames = ["presse-1", "presse-2"];
+
+const images: { img: any; src: string; portrait: boolean }[] = [];
+for (const filename of imageFileNames) {
+  const image = (await import(`../../public/images/${filename}.jpg`)).default;
+  images.push({
+    img: image,
+    src: "/images/" + filename + ".jpg",
+    portrait: image.height > image.width,
+  });
+}
+const [mainImage, secondaryImage] = images;
+---
+
+<BaseLayout title="Maria Due - Ny EP Gravul">
+  <section lang="nb">
+    <h1>Maria Due rister i de døde på sin nye EP Gravul</h1>
+    <blockquote>
+      Jeg ligger på graven og uler. Jeg presser meg mot bakken så hardt som jeg
+      kan. Jeg vil ned, jeg vil ned!
+    </blockquote>
+    <p>
+      Slik åpner første sang på Maria Due sin nye EP, som slippes 10. oktober.
+      <em>Gravul</em> består av fem meningsmetettede sanger skrevet i tiden etter
+      at Maria Due mistet begge sine foreldre. Hun går inn i rollen som en slags
+      gråtekone for vår tid. Hvordan leve mens en ser sine nære bli syke og dø? Hvor
+      skal en gjøre av ur-følelsene i den moderne byen? Gravul er et eksistensielt
+      frigjøringsprosjekt som insisterer på retten til å ha det som en har det, konstruktivt
+      eller ikke. Dette er et altså et annerledes prosjekt fra Maria Due, selv om
+      stemmen og gitaren er den samme.
+    </p>
+    <p>
+      <em>Gravul</em> er produsert av <a
+        href="https://www.baarding.com/"
+        target="_blank">Bård Ingebrigtsen</a
+      > og Maria Due og gis ut digitalt på Bored Airlines. Releasekonsert på <a
+        href="https://kampenbistro.ticketco.events/no/nb/e/maria_due__epslippfest_paa_kampen_bistro"
+        rel="noreferrer"
+        target="_blank">Kampen Bistro 18. Okt</a
+      >.
+    </p>
+    <h2>Lytteropplevelser</h2>
+    <blockquote>
+      Med EP’en Gravul leverer Maria en svært personlig plate, denne gang i
+      norsk språkdrakt, som bærer tydelig preg av å komme fra et intenst
+      uttrykksbehov. En nydelig samling låter med perfekte minimalistiske
+      arrangement som formidles så inderlig og ekte som det er mulig, uten å ty
+      til noen form for overdrivelser. Dette føles mer som et manifest enn et
+      produkt.
+    </blockquote>
+    <p class="citation">Hans Petter Gundersen</p>
+    <blockquote>
+      Maria Due har sin helt egen greie gående i den norske musikalske faunaen –
+      uavhengig av hvem hun har med seg i studio. (&hellip;) I motsetning til
+      veldig mange andre, så gjentar hun seg ikke. Det er utvikling både
+      musikalsk og i selve stemmebåndene, høres det ut til. Stemmen hennes blir
+      bare større og varmere og rundere for hver plate hun gir ut. (&hellip;)
+      Det ville vært umulig å si nei til enhver forespørsel som ble levert med
+      denne stemmen.
+    </blockquote>
+    <p class="citation">
+      <a
+        href="https://www.stemmegaffel.no/2019/05/musikkanmeldelse-maria-due-the-colour-white-2019/"
+        target="_blank">Stemmegaffel om <em>The Colour White</em> (2019)</a
+      >
+    </p>
+    <h2>Om artisten</h2>
+    <p>
+      Maria Due har gitt ut tre soloalbum tidligere; Kissing in Public (2010),
+      Past Potential Future Lover (2013), og The Colour White (2019) til gode
+      kritikker. Hun har også deltatt som vokalist i samarbeid med bla Lucky
+      Fish, Torgny Amdam, Chinatown bluesband og The Last Hurrah!! Hun har spilt
+      konserter med og uten band i New York, LA, Moskva, Madrid, Valencia,
+      Mumbai, Stockholm, Gøteborg, samt div. spillesteder i Norge.
+    </p>
+    <h2>Bilder</h2>
+    <p>Fotograf: Simon Mitternacht (redigering: Ida Holth)</p>
+    <div class="images">
+      {
+        images.map((image, i) => (
+          <a
+            href={image.src}
+            download
+            class:list={[image.portrait ? "portrait" : undefined]}
+            type="image/jpeg"
+          >
+            <Picture
+              src={image.img}
+              formats={["avif", "webp"]}
+              alt="Maria Due i skjærgårdslandskap"
+              width={image.portrait ? 400 : 600}
+            />
+            <i aria-hidden="true">&#xf019;</i>
+            <span>Last ned full oppløsning</span>
+          </a>
+        ))
+      }
+    </div>
+    <h2>Medvirkende</h2>
+    <dl>
+      <dt>Produsent</dt>
+      <dd>
+        <a href="https://www.baarding.com/" target="_blank">Bård Ingebrigtsen</a
+        > og <a href="/">Maria Due</a>
+      </dd>
+
+      <dt>Innspillingstekniker</dt>
+      <dd>
+        <a href="https://mariaorietaband.com/" target="_blank">Maria Orieta</a>.
+        Pålegg innspilt av Bård Ingebrigtsen
+      </dd>
+
+      <dt>Omslag</dt>
+      <dd>
+        <a href="https://stefanmatioc.com/" target="_blank">Stefan Matioc</a> (@stefanmatioc)
+      </dd>
+
+      <dt>Vokal, akkustisk gitar, kam, vibrafon</dt>
+      <dd>Maria Due</dd>
+
+      <dt>Piano, orgel, trekkspill, leirdue, sag</dt>
+      <dd>Marita Igelkjøn</dd>
+
+      <dt>Elektrisk gitar</dt>
+      <dd>Bård Ingebrigtsen</dd>
+
+      <dt>Trommer</dt>
+      <dd>
+        <a href="https://www.gardnilssen.com/" target="_blank">Gard Nilssen</a>
+      </dd>
+
+      <dt>Kontrabass</dt>
+      <dd>
+        <a
+          href="https://www.facebook.com/Fjosetlydstudio/"
+          target="_blank"
+          rel="noreferrer">Eirik Øien</a
+        >
+      </dd>
+
+      <dt>Kor</dt>
+      <dd>Brødrekoret</dd>
+
+      <dt>Valthorn</dt>
+      <dd>Guro Brokke Omland</dd>
+    </dl>
+  </section>
+  <aside>
+    <h2>Lenker</h2>
+    <ul>
+      <li>
+        <a
+          href="https://www.facebook.com/p/Maria-Due-100066935628332/"
+          rel="noreferrer"
+          target="_blank">Maria Due Facebook</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://kampenbistro.ticketco.events/no/nb/e/maria_due__epslippfest_paa_kampen_bistro"
+          rel="noreferrer"
+          target="_blank">Releasekonsert</a
+        >
+      </li>
+    </ul>
+  </aside>
+</BaseLayout>
+
+<style>
+  section {
+    max-width: 70ch;
+    margin: auto;
+    margin-top: 3em;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    text-wrap: balance;
+  }
+  h2 {
+    font-size: 1.6rem;
+    margin-top: 1.4em;
+  }
+
+  blockquote {
+    position: relative;
+    margin-bottom: 1em;
+    margin-inline: 2em;
+    font-style: italic;
+    &:before {
+      position: absolute;
+      left: -0.6em;
+      top: -0.4em;
+      font-size: 1.7rem;
+      /* width: 1em; */
+      content: "«";
+    }
+    &:after {
+      position: absolute;
+      content: "»";
+      height: 1em;
+      bottom: 0.15em;
+      margin-left: 0.15em;
+      font-size: 1.7rem;
+    }
+  }
+  p {
+    margin-bottom: 1em;
+    hyphens: auto;
+  }
+  .citation {
+    text-align: right;
+  }
+
+  .images {
+    display: flex;
+    justify-content: center;
+    gap: var(--large-gap);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  ul {
+    padding-inline: 2em;
+    margin-block: 1em;
+  }
+  li {
+    list-style: disc;
+  }
+
+  a[type="image/jpeg"] {
+    display: block;
+    flex-basis: min(400px, 100%);
+    position: relative;
+
+    text-decoration: none;
+    span {
+      text-decoration: underline;
+    }
+  }
+
+  a[type="image/jpeg"].portrait {
+    flex-basis: max(300px, calc(40% - var(--large-gap)));
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: fit-content;
+  }
+
+  i {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-style: normal;
+  }
+
+  dt {
+    margin-top: 1.4em;
+    margin-bottom: 0.2em;
+    font-weight: 700;
+  }
+
+  dd {
+    margin-left: 1em;
+  }
+
+  @media (min-width: 550px) {
+    dl {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+    }
+    dt {
+      width: calc(50% - 1em);
+      text-align: right;
+      margin-top: 0.4em;
+    }
+    dd {
+      width: calc(50% - 1em);
+    }
+  }
+</style>
