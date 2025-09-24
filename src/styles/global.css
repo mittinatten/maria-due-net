@@ -137,6 +137,14 @@ li {
   list-style: none;
 }
 
+img {
+  font-size: 0.8rem;
+  text-wrap: balance;
+  font-style: italic;
+  display: block;
+  color: gray;
+  line-height: 2;
+}
 
 
 :host,
