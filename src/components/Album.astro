@@ -25,17 +25,31 @@ const { album } = Astro.props;
       height="800"
       width="800"
     />
-    <p property="producer" typeof="Person" resource={album.producer.sameAs}>
-      Produced by
-      {
-        album.producer.homePage ? (
-          <a href={album.producer.homePage} property="url">
+    <p>
+      <span property="producer" typeof="Person" resource={album.producer.sameAs}
+        >Produced by
+        {
+          album.producer.homePage ? (
+            // to get right whitespace for link underline
+            // prettier-ignore
+            <a href={album.producer.homePage} property="url"><span property="name">{album.producer.name}</span></a>
+          ) : (
             <span property="name">{album.producer.name}</span>
-          </a>
-        ) : (
-          <span property="name">{album.producer.name}</span>
-        )
-      }
+          )
+        }
+      </span>
+      on
+      <span property="recordLabel" typeof="Organization"
+        >{
+          album.recordLabel.homePage ? (
+            // to get right whitespace for link underline
+            // prettier-ignore
+            <a href={album.recordLabel.homePage} property="url"><span property="name">{album.recordLabel  .name}</span></a>
+          ) : (
+            <span property="name">{album.recordLabel.name}</span>
+          )
+        }
+      </span>
       (<span property="datePublished">{album.year}</span>).
     </p>
   </div>

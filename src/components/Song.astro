@@ -34,8 +34,6 @@ const { song, origin } = Astro.props;
     <span property="byArtist" typeof="MusicGroup" resource={origin}>
       <span property="name">Maria Due</span>
     </span>
-    in
-    <span property="datePublished">{song.album.year}</span>
     on the album
     <a
       href={song.album.path}
@@ -43,7 +41,19 @@ const { song, origin } = Astro.props;
       resource={song.album.resourceURI}
     >
       <span property="name">{song.album.title}</span></a
-    >.
+    >
+    (<span property="recordLabel" typeof="Organization"
+      >{
+        song.album.recordLabel.homePage ? (
+          // to get right whitespace for link underline
+          // prettier-ignore
+          <a href={song.album.recordLabel.homePage} property="url"><span property="name">{song.album.recordLabel  .name}</span></a>
+        ) : (
+          <span property="name">{song.album.recordLabel.name}</span>
+        )
+      }
+    </span>
+    <span property="datePublished">{song.album.year}</span>).
   </p>
   <p><SongCreator {song} {origin} /></p>
   {

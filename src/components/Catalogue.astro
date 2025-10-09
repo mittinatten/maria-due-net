@@ -26,8 +26,10 @@ const { albums, appearsOn } = Astro.props;
             fetchpriority={i < 2 ? "high" : "auto"}
           />
           <div class="title">
-            <span property="name">{album.title}</span>(
-            <span property="datePublished">{album.year}</span>)
+            <span property="name">{album.title}</span>
+            <span>
+              (<span property="datePublished">{album.year}</span>)
+            </span>
           </div>
         </a>
       </li>

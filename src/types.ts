@@ -50,13 +50,22 @@ export interface RawSong {
   album: {
     title: string;
     year: number;
+    recordLabel: {
+      name: string;
+      homePage: string;
+    }
   };
   video?: string;
 }
 
 export interface Song extends RawSong {
   path: string;
-  album: Link & { year: number };
+  album: Link & {
+    year: number, recordLabel: {
+      name: string;
+      homePage: string;
+    }
+  };
   videoId?: string;
   resourceURI: string;
 }

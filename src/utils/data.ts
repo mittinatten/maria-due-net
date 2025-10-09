@@ -132,6 +132,10 @@ export async function getAllSongs(origin: string): Promise<Song[]> {
         album {
           title
           year
+          recordLabel {
+            name
+            homePage
+          }
         }
         video
         lyricsBy {
@@ -149,18 +153,20 @@ export async function getAllSongs(origin: string): Promise<Song[]> {
       }
     }`);
 
-  allSongs = response.allSongs.map((song) => ({
-    ...song,
-    path: songPath(song),
-    resourceURI: origin + songPath(song),
-    album: {
-      ...song.album,
-      path: albumPath(song.album),
-      resourceURI: origin + albumPath(song.album),
-      year: song.album.year,
-    },
-    videoId: song.video && videoId(song.video),
-  }));
+  allSongs = response.allSongs.map((song) => {
+    console.log(song.album); return {
+      ...song,
+      path: songPath(song),
+      resourceURI: origin + songPath(song),
+      album: {
+        ...song.album,
+        path: albumPath(song.album),
+        resourceURI: origin + albumPath(song.album),
+        year: song.album.year,
+      },
+      videoId: song.video && videoId(song.video),
+    }
+  });
 
   return allSongs;
 }
