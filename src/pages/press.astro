@@ -2,7 +2,7 @@
 import { Picture } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const imageFileNames = ["presse-1", "presse-2"];
+const imageFileNames = ["gravul-cover", "presse-1", "presse-2"];
 
 const images: { img: any; src: string; portrait: boolean }[] = [];
 for (const filename of imageFileNames) {
@@ -13,7 +13,7 @@ for (const filename of imageFileNames) {
     portrait: image.height > image.width,
   });
 }
-const [mainImage, secondaryImage] = images;
+const [coverImage, ...pressPhotos] = images;
 ---
 
 <BaseLayout title="Maria Due - Ny EP Gravul">
@@ -44,6 +44,26 @@ const [mainImage, secondaryImage] = images;
         target="_blank">Kampen Bistro 18. Oktober</a
       >.
     </p>
+    <div class="cover-image">
+      <a
+        href={coverImage.src}
+        download
+        class:list={[coverImage.portrait ? "portrait" : undefined]}
+        type="image/jpeg"
+      >
+        <Picture
+          src={coverImage.img}
+          formats={["avif", "webp"]}
+          alt="Tegning av en ulv som uler ordene 'Gravul Maria Due'"
+          width={300}
+        />
+        <div class="download-image-link">
+          <i aria-hidden="true">&#xf019;</i>
+          <span>Last ned full oppløsning</span>
+        </div>
+      </a>
+    </div>
+
     <h2>Lytteropplevelser</h2>
     <blockquote>
       Med EP’en Gravul leverer Maria en svært personlig plate, denne gang i
@@ -81,7 +101,7 @@ const [mainImage, secondaryImage] = images;
     <p>Fotograf: Simon Mitternacht (redigering: Ida Holth)</p>
     <div class="images">
       {
-        images.map((image, i) => (
+        pressPhotos.map((image, i) => (
           <a
             href={image.src}
             download
@@ -209,12 +229,20 @@ const [mainImage, secondaryImage] = images;
       font-size: 1.7rem;
     }
   }
+
   p {
     margin-bottom: 1em;
     hyphens: auto;
   }
   .citation {
     text-align: right;
+  }
+
+  .cover-image > a {
+    display: block;
+    width: fit-content;
+    margin: auto;
+    margin-top: 1.5em;
   }
 
   .images {
