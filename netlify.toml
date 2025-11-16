@@ -1,0 +1,21 @@
+# Cache web fonts 1 week. They rarely change, but might be updated without filename change.
+[[headers]].
+  for = "/*.woff2"
+  [headers.values]
+  cache-control = "max-age=604800"
+
+# Cache generated images for 1 month. They have a content hash.
+[[headers]]
+  for = "/*.avif"
+  [headers.values]
+  cache-control = "max-age=18144000"
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+  cache-control = "max-age=604800"
+
+# Cache icons for 1 hour, they might change without a filename change.
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+  cache-control = "max-age=3600"
