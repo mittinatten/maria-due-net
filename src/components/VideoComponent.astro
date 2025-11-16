@@ -16,14 +16,14 @@ const id =
 <div class="wrapper" resource={id} typeof="VideoObject">
   <meta property="musicBy" typeof="MusicGroup" resource={origin} />
   <meta property="description" content="Music video by Maria Due" />
-  <meta property="contentUrl url" content={video.url} />
+  <meta property="contentUrl" content={video.url} />
   <meta property="name" content={video.title} />
   <meta
-    property="thumbnailUrl"
+    property="thumbnail"
     content={`https://img.youtube.com/vi/${video.id}/0.jpg`}
   />
 
-  <a href={video.url} rel="noreferrer" target="_blank">
+  <a href={video.url} property="url" rel="noreferrer" target="_blank">
     <Picture
       src={`https://img.youtube.com/vi/${video.id}/0.jpg`}
       alt=""
