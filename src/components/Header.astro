@@ -48,7 +48,7 @@ const menuItems = [
             .map((item, position) => (
               <li property="itemListElement" typeof="ListItem">
                 <meta property="position" content={position.toString()} />
-                <a class="item" href={item.path} property="url">
+                <a property="item" class="item" href={item.path} property="url">
                   <span property="name">{item.title}</span>
                 </a>
               </li>
